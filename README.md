@@ -20,7 +20,7 @@ Before running the container make sure that you have the following environment v
 |---------------------|-------------|
 | SERVICE_ACCOUNT | Your firebase service account |
 | FIREBASE_PROJECT | Your firebase project name |
-| ENVIROMENT | Set to production to send notification or anything else to test without actually sending |
+| ENVIRONMENT | Set to production to send notification or anything else to test without actually sending |
 ---
 
 ## Continuous Integration 🤖
