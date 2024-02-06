@@ -8,14 +8,19 @@ A Very Good Project created by Very Good CLI.
 
 ## Installation 💻
 
-**❗ In order to start using Navis Push Worker you must have the [Dart SDK][dart_install_link] installed on your machine.**
-
-Install via `dart pub add`:
+**❗ In order to start using Navis Push Worker you must have the [Docker][docker_install_link] (or docker equivalent) installed on your machine.**
 
 ```sh
-dart pub add navis_push_worker
+docker build --pull --rm -f "Dockerfile" -t navispushworker:latest "." 
 ```
 
+Before running the container make sure that you have the following enviroment variables:
+
+| Enviroment variable | Description |
+|---------------------|-------------|
+| SERVICE_ACCOUNT | Your firebase service account |
+| FIREBASE_PROJECT | Your firebase project name |
+| ENVIROMENT | Set to production to send notification or anything else to test without actually sending |
 ---
 
 ## Continuous Integration 🤖
@@ -46,7 +51,7 @@ genhtml coverage/lcov.info -o coverage/
 open coverage/index.html
 ```
 
-[dart_install_link]: https://dart.dev/get-dart
+[docker_install_link]: https://www.docker.com/get-started/
 [github_actions_link]: https://docs.github.com/en/actions/learn-github-actions
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_link]: https://opensource.org/licenses/MIT
