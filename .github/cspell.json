@@ -16,6 +16,8 @@
   ],
   "useGitignore": true,
   "words": [
-    "navis_push_worker"
+    "navis_push_worker",
+    "Navis",
+    "navispushworker"
   ]
 }

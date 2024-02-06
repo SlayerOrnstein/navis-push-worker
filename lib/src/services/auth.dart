@@ -47,7 +47,7 @@ class Auth {
     try {
       final request = SendMessageRequest()..message = message;
 
-      final enviroment = Platform.environment['ENVIROMENT'];
+      final enviroment = Platform.environment['ENVIRONMENT'];
       if (enviroment == 'production') {
         await _fcm?.projects.messages.send(request, parent);
       }

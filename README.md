@@ -14,9 +14,9 @@ A Very Good Project created by Very Good CLI.
 docker build --pull --rm -f "Dockerfile" -t navispushworker:latest "." 
 ```
 
-Before running the container make sure that you have the following enviroment variables:
+Before running the container make sure that you have the following environment variables:
 
-| Enviroment variable | Description |
+| Environment variable | Description |
 |---------------------|-------------|
 | SERVICE_ACCOUNT | Your firebase service account |
 | FIREBASE_PROJECT | Your firebase project name |
