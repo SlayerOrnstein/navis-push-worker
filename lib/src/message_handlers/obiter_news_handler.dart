@@ -20,8 +20,7 @@ class OrbiterNewsHandler extends MessageHandler {
     final ids = cache.getAllIds(key);
 
     for (final news in orbiterNews) {
-      if (ids.contains(news.id) ||
-          recurringEventLimiter(news.date, limit: const Duration(hours: 1))) {
+      if (ids.contains(news.id) || recurringEventLimiter(news.date)) {
         continue;
       }
 

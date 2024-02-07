@@ -1,5 +1,6 @@
 import 'package:googleapis/fcm/v1.dart';
 import 'package:navis_push_worker/handlers.dart';
+import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:navis_push_worker/src/utils.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
@@ -14,7 +15,8 @@ class DuviriHandler extends MessageHandler {
     final key = cacheKey(platform, topic);
     final ids = cache.getAllIds(key);
 
-    if (ids.contains(duviriCycle.id)) return;
+    if (ids.contains(duviriCycle.id) ||
+        recurringEventLimiter(duviriCycle.activation)) return;
 
     final notification = Notification()
       ..title = 'Duviri Cycle'

@@ -1,6 +1,7 @@
 import 'package:googleapis/fcm/v1.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
+import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:navis_push_worker/src/utils.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
@@ -15,8 +16,6 @@ class CetusHandler extends MessageHandler {
 
   static const _nightText = 'Get ready Tenno the Eidolons are waking up soon';
 
-  static const _preNotify = Duration(minutes: 10);
-
   @override
   Future<void> notify() async {
     final topic =
@@ -24,8 +23,6 @@ class CetusHandler extends MessageHandler {
 
     final key = cacheKey(platform, topic);
     final ids = cache.getAllIds(key);
-    final now = DateTime.now();
-
     final day = Notification()
       ..title = _title
       ..body = _dayText;
@@ -34,8 +31,7 @@ class CetusHandler extends MessageHandler {
       ..title = _title
       ..body = _nightText;
 
-    if (!ids.contains(cetus.id) &&
-        cetus.expiry.difference(now) <= _preNotify) {
+    if (!ids.contains(cetus.id) && recurringEventLimiter(cetus.expiry)) {
       await auth.send(topic, !cetus.isDay ? day : night);
       cache.addId(key, ids..add(cetus.id));
     }

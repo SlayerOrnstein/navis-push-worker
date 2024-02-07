@@ -1,6 +1,7 @@
 import 'package:googleapis/fcm/v1.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
+import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:navis_push_worker/src/utils.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
@@ -24,10 +25,9 @@ class EarthHandler extends MessageHandler {
       ..title = _title
       ..body = 'It is now ${earth.isDay ? 'day' : 'night'} on earth';
 
-    final min = earth.activation.difference(DateTime.now()) <
-        const Duration(minutes: 5);
-
-    if (ids.contains(earth.id) && min) return;
+    if (ids.contains(earth.id) || recurringEventLimiter(earth.activation)) {
+      return;
+    }
 
     await auth.send(topic, notification);
     cache.addId(key, ids..add(earth.id));
