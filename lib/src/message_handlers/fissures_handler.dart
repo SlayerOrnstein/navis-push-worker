@@ -1,5 +1,6 @@
 import 'package:googleapis/fcm/v1.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
+import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class FissuresHandler extends MessageHandler {
@@ -13,7 +14,10 @@ class FissuresHandler extends MessageHandler {
 
     for (final fissure in fissures) {
       if (fissure.expired) continue;
-      if (ids.contains(fissure.id)) continue;
+      if (ids.contains(fissure.id) ||
+          recurringEventLimiter(fissure.activation)) {
+        continue;
+      }
 
       final notification = Notification()
         ..title = '${fissure.tier} Fissure'

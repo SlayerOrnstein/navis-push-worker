@@ -3,7 +3,6 @@ import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
 import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:navis_push_worker/src/utils.dart';
-import 'package:time/time.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class SortieHandler extends MessageHandler {
@@ -23,10 +22,7 @@ class SortieHandler extends MessageHandler {
       ..title = _title
       ..body = _body;
 
-    final isPassLimit =
-        recurringEventLimiter(sortie.activation, limit: 1.minutes);
-
-    if (ids.contains(sortie.id) || isPassLimit) {
+    if (ids.contains(sortie.id) || recurringEventLimiter(sortie.activation)) {
       return;
     }
 

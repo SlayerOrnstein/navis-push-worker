@@ -1,5 +1,6 @@
 import 'package:googleapis/fcm/v1.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
+import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:navis_push_worker/src/utils.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
@@ -33,7 +34,8 @@ class Invasionhandler extends MessageHandler {
       const key = 'invasions';
       final ids = cache.getAllIds(key);
 
-      if (ids.contains(invasion.id)) continue;
+      if (ids.contains(invasion.id) ||
+          recurringEventLimiter(invasion.activation)) continue;
 
       final attacker = invasion.vsInfestation
           ? null
