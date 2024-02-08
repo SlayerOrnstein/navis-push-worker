@@ -23,7 +23,7 @@ class FissuresHandler extends MessageHandler {
         ..title = '${fissure.tier} Fissure'
         ..body = '${fissure.node} - ${fissure.missionType} - ${fissure.enemy}';
 
-      if (fissure.isHard) notification.title = 'Arbitration - ${fissure.tier}';
+      if (fissure.isHard) notification.title = 'Steel path - ${fissure.tier}';
       if (fissure.isStorm) notification.title = 'Void Storm - ${fissure.tier}';
 
       cache.addId('fissures', ids..add(fissure.id));
