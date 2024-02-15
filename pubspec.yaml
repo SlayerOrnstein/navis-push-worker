@@ -18,8 +18,8 @@ dependencies:
   time: ^2.1.4
   warframestat_client:
     git:
-      url: https://github.com/SlayerOrnstein/warframestat_client.git
-      ref: v3.6.0
+      url: https://github.com/WFCD/warframestat_client.git
+      ref: v3.6.2
 
 dev_dependencies:
   mocktail: ^1.0.0
