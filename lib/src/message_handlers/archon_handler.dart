@@ -2,7 +2,6 @@ import 'package:googleapis/fcm/v1.dart';
 import 'package:navis_push_worker/handlers.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/time_limits.dart';
-import 'package:navis_push_worker/src/utils.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class ArchonHandler extends MessageHandler {
@@ -12,10 +11,9 @@ class ArchonHandler extends MessageHandler {
 
   @override
   Future<void> notify() async {
-    const topic = NotificationKeys.archonHunt;
+    const key = NotificationKeys.archonHunt;
     const title = 'Archon Hunt';
 
-    final key = cacheKey(platform, topic);
     final ids = cache.getAllIds(key);
 
     if (ids.contains(archon.id)) return;
@@ -26,7 +24,7 @@ class ArchonHandler extends MessageHandler {
 
     if (recurringEventLimiter(archon.activation)) return;
 
-    await auth.send(topic, notification);
+    await auth.send(key, notification);
     cache.addId(key, ids..add(archon.id));
   }
 }

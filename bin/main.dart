@@ -23,7 +23,7 @@ Future<void> main() async {
 Future<void> sendNotifications(Worldstate state) async {
   final handlers = <MessageHandler>[
     AlertHandler(state.alerts),
-    BaroHandler(state.voidTrader),
+    BaroHandler(state.voidTraders),
     CetusHandler(state.cetusCycle),
     DarvoDealHandler(state.dailyDeals),
     // DuviriHandler(state.duviriCycle),

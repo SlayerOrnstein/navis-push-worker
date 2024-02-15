@@ -2,7 +2,6 @@ import 'package:googleapis/fcm/v1.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
 import 'package:navis_push_worker/src/time_limits.dart';
-import 'package:navis_push_worker/src/utils.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class CetusHandler extends MessageHandler {
@@ -21,7 +20,7 @@ class CetusHandler extends MessageHandler {
     final topic =
         !cetus.isDay ? NotificationKeys.dayKey : NotificationKeys.nightKey;
 
-    final key = cacheKey(platform, topic);
+    final key = topic;
     final ids = cache.getAllIds(key);
     final day = Notification()
       ..title = _title
