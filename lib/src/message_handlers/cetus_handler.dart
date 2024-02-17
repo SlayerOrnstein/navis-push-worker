@@ -18,7 +18,7 @@ class CetusHandler extends MessageHandler {
   @override
   Future<void> notify() async {
     final topic =
-        !cetus.isDay ? NotificationKeys.dayKey : NotificationKeys.nightKey;
+        cetus.isDay ? NotificationKeys.dayKey : NotificationKeys.nightKey;
 
     final key = topic;
     final ids = cache.getAllIds(key);
