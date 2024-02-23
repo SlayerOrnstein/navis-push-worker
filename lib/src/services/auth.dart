@@ -21,7 +21,13 @@ class Auth {
     return _auth ??= Auth();
   }
 
-  static final _androidConfig = AndroidConfig(priority: 'HIGH');
+  static final _androidNotification = AndroidNotification()
+    ..color = '#1565c0ff'
+    ..icon = 'ic_launcher';
+
+  static final _androidConfig = AndroidConfig()
+    ..priority = 'HIGH'
+    ..notification = _androidNotification;
 
   Future<void> send(String? topic, Notification? notification) async {
     if (topic == null || notification == null) return;
