@@ -23,7 +23,7 @@ class Auth {
 
   static final _androidNotification = AndroidNotification()
     ..color = '#1565c0ff'
-    ..icon = 'ic_nightmare';
+    ..icon = 'ic_launcher';
 
   static final _androidConfig = AndroidConfig()
     ..priority = 'HIGH'
