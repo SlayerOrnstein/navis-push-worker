@@ -19,7 +19,7 @@ class MessageIdCache {
     return _box?.get(key) ?? <String>[];
   }
 
-  void addId(String topic, List<String> ids) {
-    _box?.put(topic, ids);
+  void addId(String key, List<String> ids) {
+    _box?.put(key, ids);
   }
 }

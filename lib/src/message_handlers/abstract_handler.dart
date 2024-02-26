@@ -1,9 +1,10 @@
 import 'package:navis_push_worker/services.dart';
 
 abstract class MessageHandler {
-  Auth get auth => locator<Auth>();
+  const MessageHandler(this.auth, this.cache);
 
-  MessageIdCache get cache => locator<MessageIdCache>();
+  final Auth auth;
+  final MessageIdCache cache;
 
   Future<void> notify();
 }

@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class CambionHandler extends MessageHandler {
-  CambionHandler(this.cambion);
+  CambionHandler(this.cambion, super.auth, super.cache);
 
   final CambionCycle cambion;
 

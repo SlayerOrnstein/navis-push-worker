@@ -4,7 +4,7 @@ import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class SentientOutpostHandler extends MessageHandler {
-  SentientOutpostHandler(this.outpost);
+  SentientOutpostHandler(this.outpost, super.auth, super.cache);
 
   final SentientOutpost outpost;
 

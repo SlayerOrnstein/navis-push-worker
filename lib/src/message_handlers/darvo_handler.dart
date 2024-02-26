@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class DarvoDealHandler extends MessageHandler {
-  DarvoDealHandler(this.darvoDeals);
+  DarvoDealHandler(this.darvoDeals, super.auth, super.cache);
 
   final List<DailyDeal> darvoDeals;
 

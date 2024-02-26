@@ -4,7 +4,7 @@ import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class DuviriHandler extends MessageHandler {
-  DuviriHandler(this.duviriCycle);
+  DuviriHandler(this.duviriCycle, super.auth, super.cache);
 
   final DuviriCycle duviriCycle;
 

@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class VallisHandler extends MessageHandler {
-  VallisHandler(this.vallis);
+  VallisHandler(this.vallis, super.auth, super.cache);
 
   final VallisCycle vallis;
 

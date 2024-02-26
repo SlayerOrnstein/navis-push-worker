@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class SortieHandler extends MessageHandler {
-  SortieHandler(this.sortie);
+  SortieHandler(this.sortie, super.auth, super.cache);
 
   final Sortie sortie;
 

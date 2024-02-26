@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class ArchonHandler extends MessageHandler {
-  ArchonHandler(this.archon);
+  ArchonHandler(this.archon, super.auth, super.cache);
 
   final Sortie archon;
 

@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class EarthHandler extends MessageHandler {
-  EarthHandler(this.earth);
+  EarthHandler(this.earth, super.auth, super.cache);
 
   final EarthCycle earth;
 

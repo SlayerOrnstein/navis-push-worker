@@ -5,7 +5,6 @@ import 'package:googleapis/fcm/v1.dart';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart';
 import 'package:mason_logger/mason_logger.dart';
-import 'package:navis_push_worker/src/services/service_locator.dart';
 
 const scopes = <String>['https://www.googleapis.com/auth/firebase.messaging'];
 
@@ -13,7 +12,7 @@ class Auth {
   static Auth? _auth;
   static FirebaseCloudMessagingApi? _fcm;
 
-  final Logger logger = locator<Logger>();
+  final Logger logger = Logger();
 
   static Future<Auth> initialize() async {
     _fcm ??= FirebaseCloudMessagingApi(await _authenticate());

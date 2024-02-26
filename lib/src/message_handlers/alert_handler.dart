@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class AlertHandler extends MessageHandler {
-  AlertHandler(this.alerts);
+  AlertHandler(this.alerts, super.auth, super.cache);
 
   final List<Alert> alerts;
 

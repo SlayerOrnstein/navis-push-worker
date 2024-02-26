@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/utils.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class Invasionhandler extends MessageHandler {
-  Invasionhandler(this.invasions);
+  Invasionhandler(this.invasions, super.auth, super.cache);
 
   final List<Invasion> invasions;
 
