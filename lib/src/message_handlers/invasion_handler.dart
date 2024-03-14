@@ -42,17 +42,17 @@ class Invasionhandler extends MessageHandler {
           : _invasionBuilder(
               node: invasion.node,
               faction: invasion.attackingFaction,
-              opposingFaction: invasion.defendingFaction,
-              reward: invasion.attackerReward.itemString,
-              rewardType: invasion.attackerReward.countedItems.first.type,
+              opposingFaction: invasion.defender.faction,
+              reward: invasion.attacker.reward!.itemString,
+              rewardType: invasion.attacker.reward!.countedItems.first.type,
             );
 
       final defender = _invasionBuilder(
         node: invasion.node,
-        faction: invasion.defendingFaction,
-        opposingFaction: invasion.attackingFaction,
-        reward: invasion.defenderReward.itemString,
-        rewardType: invasion.defenderReward.countedItems.first.type,
+        faction: invasion.defender.faction,
+        opposingFaction: invasion.attacker.faction,
+        reward: invasion.defender.reward!.itemString,
+        rewardType: invasion.defender.reward!.countedItems.first.type,
         defending: true,
       );
 
