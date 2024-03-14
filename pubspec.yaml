@@ -15,10 +15,7 @@ dependencies:
   intl: ^0.19.0
   mason_logger: ^0.2.11
   time: ^2.1.4
-  warframestat_client:
-    git:
-      url: https://github.com/WFCD/warframestat_client.git
-      ref: v3.6.3
+  warframestat_client: ^3.6.8
 
 dev_dependencies:
   mocktail: ^1.0.0
