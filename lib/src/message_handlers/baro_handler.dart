@@ -12,6 +12,9 @@ class BaroHandler extends MessageHandler {
 
   @override
   Future<void> notify() async {
+    // Will just having this running in production as a way to test a theory.
+    if (traders.length > 1) print(traders.map((e) => e.toJson()));
+
     for (final trader in traders.where((e) => e.active)) {
       final notification = Notification()
         ..title = "Baro Ki'Teer"
