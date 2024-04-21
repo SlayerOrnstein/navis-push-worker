@@ -12,18 +12,17 @@ class BaroHandler extends MessageHandler {
 
   @override
   Future<void> notify() async {
-    for (final trader in traders) {
+    for (final trader in traders.where((e) => e.active)) {
       final notification = Notification()
         ..title = "Baro Ki'Teer"
         ..body = "Baro Ki'Teer has arrived";
 
       final timeLeft = trader.expiry.difference(DateTime.now());
-      final isLeaving = timeLeft < 60.minutes && timeLeft > 59.minutes;
-      if (isLeaving) {
-        notification.body = "Baro Ki'Teer is leaving soon";
-      }
+      final isLeaving = timeLeft < 60.minutes && timeLeft > 58.minutes;
+      if (isLeaving) notification.body = "Baro Ki'Teer is leaving soon";
 
-      if (recurringEventLimiter(trader.activation) || isLeaving) {
+      final isArriving = recurringEventLimiter(trader.activation);
+      if (isArriving || isLeaving) {
         await auth.send(NotificationKeys.baroKey, notification);
       }
     }
