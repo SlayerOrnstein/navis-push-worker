@@ -13,9 +13,11 @@ Future<void> main() async {
 
   try {
     logger.info('Listening to websocket');
-    client
-        .worldstateWebSocket()
-        .listen((w) => sendNotifications(w, auth, cache));
+
+    Timer.periodic(const Duration(minutes: 1), (timer) async {
+      final worldstate = await client.fetchWorldstate();
+      await sendNotifications(worldstate, auth, cache);
+    });
 
     logger.info('Started push_server');
   } catch (e) {
