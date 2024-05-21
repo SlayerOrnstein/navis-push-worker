@@ -17,8 +17,8 @@ class BaroHandler extends MessageHandler {
       ..title = "Baro Ki'Teer"
       ..body = "Baro Ki'Teer has arrived";
 
-    final timeLeft = trader.expiry.difference(DateTime.now());
-    final isLeaving = timeLeft < 60.minutes && timeLeft > 58.minutes;
+    final timeLeft = trader.expiry.difference(DateTime.timestamp());
+    final isLeaving = timeLeft < 60.minutes && timeLeft > 59.minutes;
     if (isLeaving) notification.body = "Baro Ki'Teer is leaving soon";
 
     final isArriving = recurringEventLimiter(trader.activation);
