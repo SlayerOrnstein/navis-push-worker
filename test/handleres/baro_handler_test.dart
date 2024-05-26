@@ -9,7 +9,7 @@ import 'package:warframestat_client/warframestat_client.dart';
 import '../mocks.dart';
 
 void main() {
-  final now = DateTime.now().toUtc();
+  final now = DateTime.timestamp();
   late MockAuth mockAuth;
   late MockMessageCache mockCache;
 
