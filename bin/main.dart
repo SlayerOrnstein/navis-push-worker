@@ -18,10 +18,17 @@ Future<void> main() async {
 
     logger.info('Listening to websocket');
 
-    client
-        .worldstateEvents()
-        .distinct((p, n) => p.timestamp.difference(n.timestamp).abs() >= delay)
-        .listen((w) => sendNotifications(w, auth, cache));
+    // client
+    //     .worldstateEvents()
+    //     .distinct((p, n) => p.timestamp.difference(n.timestamp).abs() >= delay)
+    //     .listen((w) => sendNotifications(w, auth, cache));
+
+    Timer.periodic(const Duration(seconds: 60), (_) async {
+      final client = WorldstateClient();
+      final state = await client.fetchWorldstate();
+
+      await sendNotifications(state, auth, cache);
+    });
 
     logger.info('Started push_server');
   } catch (e) {
