@@ -15,9 +15,10 @@ dependencies:
   intl: ^0.19.0
   mason_logger: ^0.2.11
   time: ^2.1.4
-  warframestat_client: ^3.6.8
+  warframestat_client: ^3.8.5
 
 dev_dependencies:
+  husky: ^0.1.7
   mocktail: ^1.0.0
   test: ^1.19.2
   very_good_analysis: ^5.1.0
