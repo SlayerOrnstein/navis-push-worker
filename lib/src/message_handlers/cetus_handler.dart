@@ -31,7 +31,7 @@ class CetusHandler extends MessageHandler {
       ..body = _nightText;
 
     if (!ids.contains(cetus.id) && recurringEventLimiter(cetus.expiry)) {
-      await auth.send(topic, !cetus.isDay ? day : night);
+      await auth.send(topic, cetus.isDay ? day : night);
       cache.addId(key, ids..add(cetus.id));
     }
   }
