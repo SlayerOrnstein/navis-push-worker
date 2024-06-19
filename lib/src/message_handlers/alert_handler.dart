@@ -21,9 +21,8 @@ class AlertHandler extends MessageHandler {
 
       final notification = Notification()
         ..title = alert.mission.node
-        ..body = '${alert.mission.type}(${alert.mission.faction})'
-            ' | ${alert.mission.minEnemyLevel} - '
-            '${alert.mission.maxEnemyLevel} |'
+        ..body = '${alert.mission.type} (${alert.mission.faction})'
+            ' | ${alert.mission.minEnemyLevel} - ${alert.mission.maxEnemyLevel}'
             ' | ${alert.mission.reward!.itemString}';
 
       await auth.send(NotificationKeys.alertsKey, notification);
