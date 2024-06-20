@@ -1,7 +1,6 @@
 import 'package:googleapis/fcm/v1.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
-import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class OrbiterNewsHandler extends MessageHandler {
@@ -19,9 +18,7 @@ class OrbiterNewsHandler extends MessageHandler {
     final ids = cache.getAllIds(key);
 
     for (final news in orbiterNews) {
-      if (ids.contains(news.id) || recurringEventLimiter(news.date)) {
-        continue;
-      }
+      if (ids.contains(news.id)) continue;
 
       if (news.primeAccess) {
         final notification = Notification()
