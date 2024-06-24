@@ -6,31 +6,27 @@ import 'package:navis_push_worker/handlers.dart';
 import 'package:navis_push_worker/services.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
-const delay = Duration(seconds: 60);
-
 Future<void> main() async {
-  final logger = Logger()..info('Starting push_server');
+  const delay = Duration(minutes: 1);
+  final logger = Logger();
 
   try {
     final client = WarframestatWebsocket.connect();
     final auth = await Auth.initialize();
     final cache = await MessageIdCache.init();
 
-    logger.info('Listening to websocket');
+    logger.info('starting push notification worker');
+    client
+        .worldstateEvents()
+        .distinct((p, n) => n.timestamp.difference(p.timestamp) < delay)
+        .listen((w) => sendNotifications(w, auth, cache));
 
-    // client
-    //     .worldstateEvents()
-    //     .distinct((p, n) => p.timestamp.difference(n.timestamp).abs() >= delay)
-    //     .listen((w) => sendNotifications(w, auth, cache));
+    // Timer.periodic(const Duration(seconds: 60), (_) async {
+    //   final client = WorldstateClient();
+    //   final state = await client.fetchWorldstate();
 
-    Timer.periodic(const Duration(seconds: 60), (_) async {
-      final client = WorldstateClient();
-      final state = await client.fetchWorldstate();
-
-      await sendNotifications(state, auth, cache);
-    });
-
-    logger.info('Started push_server');
+    //   await sendNotifications(state, auth, cache);
+    // });
   } catch (e) {
     logger.err(e.toString());
     exit(1);
@@ -47,7 +43,7 @@ Future<void> sendNotifications(
     BaroHandler(state.voidTraders, auth, cache),
     CetusHandler(state.cetusCycle, auth, cache),
     DarvoDealHandler(state.dailyDeals, auth, cache),
-    // DuviriHandler(state.duviriCycle, auth, cache),
+    DuviriHandler(state.duviriCycle, auth, cache),
     EarthHandler(state.earthCycle, auth, cache),
     CambionHandler(state.cambionCycle, auth, cache),
     Invasionhandler(state.invasions, auth, cache),

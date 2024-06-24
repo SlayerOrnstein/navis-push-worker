@@ -1,6 +1,5 @@
 import 'package:googleapis/fcm/v1.dart';
 import 'package:navis_push_worker/handlers.dart';
-import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class DuviriHandler extends MessageHandler {
@@ -10,18 +9,17 @@ class DuviriHandler extends MessageHandler {
 
   @override
   Future<void> notify() async {
-    final topic = 'duviri_${duviriCycle.state}';
-    final key = topic;
-    final ids = cache.getAllIds(key);
+    final state = duviriCycle.state.name;
+    final topic = 'duviri_$state';
+    final ids = cache.getAllIds(topic);
 
-    if (ids.contains(duviriCycle.id) ||
-        recurringEventLimiter(duviriCycle.activation)) return;
+    if (ids.contains(duviriCycle.id)) return;
 
     final notification = Notification()
       ..title = 'Duviri Cycle'
-      ..body = 'The current mood in Duviri is ${duviriCycle.state}';
+      ..body = 'The child king is feeling $state';
 
     await auth.send(topic, notification);
-    cache.addId(key, ids..add(duviriCycle.id));
+    cache.addId(topic, ids..add(duviriCycle.id));
   }
 }
