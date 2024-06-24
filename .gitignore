@@ -10,3 +10,5 @@ pubspec.lock
 
 # FVM Version Cache
 .fvm/
+
+Dockerfile.debug
