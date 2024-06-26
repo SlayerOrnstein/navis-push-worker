@@ -21,4 +21,4 @@ dev_dependencies:
   husky: ^0.1.7
   mocktail: ^1.0.0
   test: ^1.19.2
-  very_good_analysis: ^5.1.0
+  very_good_analysis: ^6.0.0
