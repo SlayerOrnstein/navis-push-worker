@@ -29,7 +29,6 @@ class Auth {
 
   Future<void> send(String? topic, Notification? notification) async {
     if (topic == null || notification == null) return;
-    logger.info('Sending notification for $topic');
 
     final message = Message()
       ..condition = "'$topic' in topics"
@@ -49,9 +48,9 @@ class Auth {
         await _fcm?.projects.messages.send(request, parent);
       }
 
-      logger.success('Sent message for $topic');
+      logger.success('message for $topic pushed');
     } catch (e) {
-      logger.alert('Failed to send message for $topic');
+      logger.alert('Failed to send message for $topic: $e');
     }
   }
 
