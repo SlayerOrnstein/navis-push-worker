@@ -50,7 +50,7 @@ class Auth {
 
       logger.success('message for $topic pushed');
     } catch (e) {
-      logger.alert('Failed to send message for $topic: $e');
+      logger.alert('failed push to $topic');
     }
   }
 
