@@ -1,4 +1,4 @@
-import 'package:googleapis/fcm/v1.dart';
+import 'package:dart_firebase_admin/messaging.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
 import 'package:navis_push_worker/src/time_limits.dart';
@@ -9,29 +9,24 @@ class CetusHandler extends MessageHandler {
 
   final CetusCycle cetus;
 
-  static const _title = 'Cetus Cycle';
-  static const _dayText =
-      'It will be day on Cetus soon, do you hear thumping in the distance?';
-
-  static const _nightText = 'Get ready Tenno the Eidolons are waking up soon';
-
   @override
   Future<void> notify() async {
+    const dayText =
+        'It will be day on Cetus soon, do you hear thumping in the distance?';
+    const nightText = 'Get ready Tenno the Eidolons are waking up soon';
+
     final topic =
         cetus.isDay ? NotificationKeys.dayKey : NotificationKeys.nightKey;
 
     final key = topic;
     final ids = cache.getAllIds(key);
-    final day = Notification()
-      ..title = _title
-      ..body = _dayText;
-
-    final night = Notification()
-      ..title = _title
-      ..body = _nightText;
+    final notification = Notification(
+      title: 'Cetus Cycle',
+      body: cetus.isDay ? dayText : nightText,
+    );
 
     if (!ids.contains(cetus.id) && recurringEventLimiter(cetus.activation)) {
-      await auth.send(topic, cetus.isDay ? day : night);
+      await auth.send(topic, notification);
       cache.addId(key, ids..add(cetus.id));
     }
   }

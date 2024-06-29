@@ -1,4 +1,4 @@
-import 'package:googleapis/fcm/v1.dart';
+import 'package:dart_firebase_admin/messaging.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:navis_push_worker/handlers.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
@@ -37,9 +37,10 @@ void main() {
       when(() => mockAuth.send(NotificationKeys.baroKey, any()))
           .thenDoNothing();
 
-      final notification = Notification()
-        ..title = "Baro Ki'Teer"
-        ..body = "Baro Ki'Teer has arrived";
+      final notification = Notification(
+        title: "Baro Ki'Teer",
+        body: "Baro Ki'Teer has arrived",
+      );
 
       final handler = BaroHandler([Trader.fromJson(mock)], mockAuth, mockCache);
       final matcher = isA<Notification>().having(
@@ -83,9 +84,10 @@ void main() {
       when(() => mockAuth.send(NotificationKeys.baroKey, any()))
           .thenDoNothing();
 
-      final notification = Notification()
-        ..title = "Baro Ki'Teer"
-        ..body = "Baro Ki'Teer is leaving soon";
+      final notification = Notification(
+        title: "Baro Ki'Teer",
+        body: "Baro Ki'Teer is leaving soon",
+      );
 
       final handler = BaroHandler([Trader.fromJson(mock)], mockAuth, mockCache);
       final matcher = isA<Notification>().having(

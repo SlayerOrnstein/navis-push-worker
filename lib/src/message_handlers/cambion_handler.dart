@@ -1,4 +1,4 @@
-import 'package:googleapis/fcm/v1.dart';
+import 'package:dart_firebase_admin/messaging.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
 import 'package:navis_push_worker/src/time_limits.dart';
@@ -17,9 +17,10 @@ class CambionHandler extends MessageHandler {
 
     final key = topic;
     final ids = cache.getAllIds(key);
-    final cycle = Notification()
-      ..title = 'Cambion Cycle'
-      ..body = 'It will be fass on Cambion soon';
+    final cycle = Notification(
+      title: 'Cambion Cycle',
+      body: 'It will be fass on Cambion soon',
+    );
 
     if (!ids.contains(cambion.id) && recurringEventLimiter(cambion.expiry)) {
       await auth.send(topic, cycle);

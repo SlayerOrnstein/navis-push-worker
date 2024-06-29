@@ -1,4 +1,4 @@
-import 'package:googleapis/fcm/v1.dart';
+import 'package:dart_firebase_admin/messaging.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
 import 'package:warframestat_client/warframestat_client.dart';
@@ -8,10 +8,6 @@ class OrbiterNewsHandler extends MessageHandler {
 
   final List<News> orbiterNews;
 
-  static const _primeAccess = 'Warframe Prime access';
-  static const _update = 'Warframe Update';
-  static const _stream = 'Warframe Stream';
-
   @override
   Future<void> notify() async {
     const key = 'orbiter_news';
@@ -19,28 +15,17 @@ class OrbiterNewsHandler extends MessageHandler {
 
     for (final news in orbiterNews) {
       if (ids.contains(news.id)) continue;
-
-      if (news.primeAccess) {
-        final notification = Notification()
-          ..title = _primeAccess
-          ..body = news.message;
-
-        await auth.send(NotificationKeys.newsPrimeKey, notification);
-      } else if (news.update) {
-        final notification = Notification()
-          ..title = _update
-          ..body = news.message;
-
-        await auth.send(NotificationKeys.newsUpdateKey, notification);
-      } else if (news.stream) {
-        final notification = Notification()
-          ..title = _stream
-          ..body = news.message;
-
-        await auth.send(NotificationKeys.newsStreamKey, notification);
-      }
-
       cache.addId(key, ids..add(news.id!));
+
+      var topic = NotificationKeys.newsPrimeKey;
+      if (news.primeAccess) topic = NotificationKeys.newsUpdateKey;
+      if (news.stream) topic = NotificationKeys.newsStreamKey;
+
+      var title = 'Warframe Prime access';
+      if (news.primeAccess) title = 'Warframe Update';
+      if (news.stream) title = 'Warframe Stream';
+
+      await auth.send(topic, Notification(title: title, body: news.message));
     }
   }
 }

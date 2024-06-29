@@ -1,4 +1,4 @@
-import 'package:googleapis/fcm/v1.dart';
+import 'package:dart_firebase_admin/messaging.dart';
 import 'package:navis_push_worker/handlers.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/time_limits.dart';
@@ -18,9 +18,10 @@ class ArchonHandler extends MessageHandler {
 
     if (ids.contains(archon.id)) return;
 
-    final notification = Notification()
-      ..title = title
-      ..body = 'New Archon hunt target ${archon.boss}';
+    final notification = Notification(
+      title: title,
+      body: 'New Archon hunt target ${archon.boss}',
+    );
 
     if (recurringEventLimiter(archon.activation)) return;
 

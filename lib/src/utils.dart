@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:googleapis/fcm/v1.dart';
+import 'package:dart_firebase_admin/messaging.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 
 String? getResourceKey(String value) {

@@ -1,4 +1,4 @@
-import 'package:googleapis/fcm/v1.dart';
+import 'package:dart_firebase_admin/messaging.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
 import 'package:navis_push_worker/src/time_limits.dart';
@@ -19,12 +19,13 @@ class AlertHandler extends MessageHandler {
         continue;
       }
 
-      final notification = Notification()
-        ..title = alert.mission.node
-        ..body = '${alert.mission.type} (${alert.mission.faction})'
+      final notification = Notification(
+        title: alert.mission.node,
+        body: '${alert.mission.type} (${alert.mission.faction})'
             ' | Level ${alert.mission.minEnemyLevel} -'
             ' ${alert.mission.maxEnemyLevel}'
-            ' | ${alert.mission.reward!.itemString}';
+            ' | ${alert.mission.reward!.itemString}',
+      );
 
       await auth.send(NotificationKeys.alertsKey, notification);
       cache.addId(key, ids..add(alert.id));

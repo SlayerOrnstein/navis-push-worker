@@ -1,6 +1,6 @@
-import 'package:googleapis/fcm/v1.dart';
+import 'package:dart_firebase_admin/messaging.dart';
+import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
-import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 class SentientOutpostHandler extends MessageHandler {
@@ -10,18 +10,16 @@ class SentientOutpostHandler extends MessageHandler {
 
   @override
   Future<void> notify() async {
-    // final key = cacheKey(platform, 'sentient_outpost');
-    // final ids = await redis.getAllIds(key);
+    final ids = cache.getAllIds(NotificationKeys.sentientOutpost);
+    cache.addId(NotificationKeys.sentientOutpost, ids..add(outpost.id));
 
-    final isOverlimit = recurringEventLimiter(outpost.activation!);
+    if (outpost.active) {
+      final notification = Notification(
+        title: 'Sentient Outpost',
+        body: 'Sentient outpost located in ${outpost.mission?.node}',
+      );
 
-    if (!isOverlimit && outpost.active) {
-      final notification = Notification()
-        ..title = 'Sentient Outpost'
-        ..body = 'Sentient outpost located in ${outpost.mission?.node}';
-
-      await auth.send('sentient_outpost', notification);
-      // await redis.addId(key, id);
+      await auth.send(NotificationKeys.sentientOutpost, notification);
     }
   }
 }

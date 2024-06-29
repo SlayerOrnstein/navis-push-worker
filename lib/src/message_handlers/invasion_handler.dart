@@ -1,4 +1,4 @@
-import 'package:googleapis/fcm/v1.dart';
+import 'package:dart_firebase_admin/messaging.dart';
 import 'package:navis_push_worker/src/message_handlers/abstract_handler.dart';
 import 'package:navis_push_worker/src/time_limits.dart';
 import 'package:navis_push_worker/src/utils.dart';
@@ -17,10 +17,11 @@ class Invasionhandler extends MessageHandler {
     required String rewardType,
     bool defending = false,
   }) {
-    final notification = Notification()
-      ..title = node
-      ..body = '$faction is rewarding $reward to those who help '
-          '${defending ? 'defend against' : 'attack'} the $opposingFaction';
+    final notification = Notification(
+      title: node,
+      body: '$faction is rewarding $reward to those who help '
+          '${defending ? 'defend against' : 'attack'} the $opposingFaction',
+    );
 
     return MessageLayout(
       topic: getResourceKey(rewardType),

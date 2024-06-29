@@ -81,6 +81,8 @@ class NotificationKeys {
   static const String strunReciever = 'strun_reciever';
   static const String strunStock = 'strun_stock';
 
+  static const String sentientOutpost = 'sentient_outpost';
+
   static const Map<String, String> resources = {
     NotificationKeys.sniptronVandalBP: 'Snipetron Vandal Blueprint',
     NotificationKeys.sniptronVandalBarrel: 'Snipetron Vandal Barrel',
