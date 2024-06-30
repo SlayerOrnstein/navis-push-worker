@@ -32,12 +32,6 @@ class Auth {
       notification: androidNotification,
     );
 
-    // final message = Message
-    // ..condition = "'$topic' in topics"
-    // ..notification = notification
-    // ..android = _androidConfig
-    // ..data = <String, String>{'click_action': 'FLUTTER_NOTIFICATION_CLICK'};
-
     final parent = Platform.environment['FIREBASE_PROJECT'];
     if (parent == null) {
       throw Exception('FIREBASE_PROJECT not provided');
