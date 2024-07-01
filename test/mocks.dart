@@ -1,7 +1,7 @@
 import 'package:mocktail/mocktail.dart';
 import 'package:navis_push_worker/services.dart';
 
-class MockAuth extends Mock implements Auth {}
+class MockAuth extends Mock implements FirebaseMessenger {}
 
 class MockMessageCache extends Mock implements MessageIdCache {
   final _temp = <String, List<String>>{};

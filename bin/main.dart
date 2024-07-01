@@ -1,25 +1,35 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dart_firebase_admin/dart_firebase_admin.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:navis_push_worker/handlers.dart';
 import 'package:navis_push_worker/services.dart';
+import 'package:navis_push_worker/src/utils.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 Future<void> main() async {
   const delay = Duration(minutes: 1);
   final logger = Logger();
 
+  final projectId = Platform.environment['FIREBASE_PROJECT'];
+  if (projectId == null) throw Exception('FIREBASE_PROJECT not provided');
+
   try {
     final client = WarframestatWebsocket.connect();
-    final auth = await Auth.initialize();
+    final adminApp = FirebaseAdminApp.initializeApp(
+      projectId,
+      getServiceAccount(),
+    );
+
+    final messenger = FirebaseMessenger(admin: adminApp, projectId: projectId);
     final cache = await MessageIdCache.init();
 
     logger.info('starting push notification worker');
     client
         .worldstateEvents()
         .distinct((p, n) => n.timestamp.difference(p.timestamp) < delay)
-        .listen((w) => sendNotifications(w, auth, cache));
+        .listen((w) => sendNotifications(w, messenger, cache));
 
     // Timer.periodic(const Duration(seconds: 60), (_) async {
     //   final client = WorldstateClient();
@@ -35,7 +45,7 @@ Future<void> main() async {
 
 Future<void> sendNotifications(
   Worldstate state,
-  Auth auth,
+  FirebaseMessenger auth,
   MessageIdCache cache,
 ) async {
   final handlers = <MessageHandler>[
