@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:collection/collection.dart';
@@ -23,10 +24,18 @@ class MessageLayout {
 }
 
 Credential getServiceAccount() {
-  final serviceAccount = File('./service_account.json');
-  if (!serviceAccount.existsSync()) {
+  final serviceAccountEnv = Platform.environment['SERVICE_ACCOUNT'];
+  if (serviceAccountEnv == null) {
     throw Exception('SERVICE_ACCOUNT not provided');
   }
 
-  return Credential.fromServiceAccount(serviceAccount);
+  final serviceAccount =
+      json.decode(utf8.decode(base64.decode(serviceAccountEnv)))
+          as Map<String, dynamic>;
+
+  return Credential.fromServiceAccountParams(
+    clientId: serviceAccount['client_id'] as String,
+    privateKey: serviceAccount['private_key'] as String,
+    email: serviceAccount['client_email'] as String,
+  );
 }
