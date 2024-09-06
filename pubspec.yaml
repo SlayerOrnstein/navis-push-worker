@@ -14,7 +14,7 @@ dependencies:
   hive: ^2.2.3
   http: ^1.2.0
   intl: ^0.19.0
-  mason_logger: ^0.2.11
+  mason_logger: ^0.3.1
   time: ^2.1.4
   warframestat_client: ^3.8.11
 
