@@ -3,8 +3,9 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:dart_firebase_admin/dart_firebase_admin.dart';
-import 'package:dart_firebase_admin/messaging.dart';
+import 'package:mason_logger/mason_logger.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
+import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 
 String? getResourceKey(String value) {
   return NotificationKeys.resources.keys.firstWhereOrNull(
@@ -14,13 +15,6 @@ String? getResourceKey(String value) {
           .contains(NotificationKeys.resources[k]!.toLowerCase());
     },
   );
-}
-
-class MessageLayout {
-  MessageLayout({required this.topic, required this.notification});
-
-  final String topic;
-  final Notification notification;
 }
 
 Credential getServiceAccount() {
@@ -38,4 +32,19 @@ Credential getServiceAccount() {
     privateKey: serviceAccount['private_key'] as String,
     email: serviceAccount['client_email'] as String,
   );
+}
+
+class RedisMasonLogger implements RedisLogger {
+  final _logger = Logger(level: Level.verbose);
+
+  @override
+  void debug(String message) => _logger.detail(message);
+
+  @override
+  void error(String message, {Object? error, StackTrace? stackTrace}) {
+    _logger.err(message);
+  }
+
+  @override
+  void info(String message) => _logger.info(message);
 }

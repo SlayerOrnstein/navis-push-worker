@@ -3,19 +3,20 @@ import 'dart:io';
 
 import 'package:dart_firebase_admin/dart_firebase_admin.dart';
 import 'package:mason_logger/mason_logger.dart';
-import 'package:navis_push_worker/handlers.dart';
-import 'package:navis_push_worker/services.dart';
-import 'package:navis_push_worker/src/utils.dart';
+import 'package:navis_push_worker/navis_push_worker.dart';
+import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 import 'package:warframestat_client/warframestat_client.dart';
 
 Future<void> main() async {
-  const delay = Duration(minutes: 1);
   final logger = Logger();
 
   final projectId = Platform.environment['FIREBASE_PROJECT'];
   if (projectId == null) throw Exception('FIREBASE_PROJECT not provided');
 
   try {
+    final redis = RedisClient(logger: RedisMasonLogger());
+    await redis.connect();
+
     final client = WarframestatWebsocket.connect();
     final adminApp = FirebaseAdminApp.initializeApp(
       projectId,
@@ -23,48 +24,25 @@ Future<void> main() async {
     );
 
     final messenger = FirebaseMessenger(admin: adminApp, projectId: projectId);
-    final cache = await MessageIdCache.init();
+    final cache = RedisIdCache(redis);
 
     logger.info('starting push notification worker');
-    client
-        .worldstateEvents()
-        .distinct((p, n) => n.timestamp.difference(p.timestamp) < delay)
-        .listen((w) => sendNotifications(w, messenger, cache));
-
-    // Timer.periodic(const Duration(seconds: 60), (_) async {
-    //   final client = WorldstateClient();
-    //   final state = await client.fetchWorldstate();
-
-    //   await sendNotifications(state, auth, cache);
-    // });
+    PushNotifier(websocket: client, auth: messenger, cache: cache)
+      ..addHandler((state) => AlertHandler(state.alerts))
+      ..addHandler((state) => BaroHandler(state.voidTraders))
+      ..addHandler((state) => CetusHandler(state.cetusCycle))
+      ..addHandler((state) => DarvoDealHandler(state.dailyDeals))
+      ..addHandler((state) => DuviriHandler(state.duviriCycle))
+      ..addHandler((state) => EarthHandler(state.earthCycle))
+      ..addHandler((state) => CambionHandler(state.cambionCycle))
+      ..addHandler((state) => Invasionhandler(state.invasions))
+      ..addHandler((state) => OrbiterNewsHandler(state.news))
+      ..addHandler((state) => SortieHandler(state.sortie))
+      ..addHandler((state) => ArchonHandler(state.archonHunt))
+      ..addHandler((state) => VallisHandler(state.vallisCycle))
+      ..addHandler((state) => FissuresHandler(state.fissures));
   } catch (e) {
     logger.err(e.toString());
     exit(1);
-  }
-}
-
-Future<void> sendNotifications(
-  Worldstate state,
-  FirebaseMessenger auth,
-  MessageIdCache cache,
-) async {
-  final handlers = <MessageHandler>[
-    AlertHandler(state.alerts, auth, cache),
-    BaroHandler(state.voidTraders, auth, cache),
-    CetusHandler(state.cetusCycle, auth, cache),
-    DarvoDealHandler(state.dailyDeals, auth, cache),
-    DuviriHandler(state.duviriCycle, auth, cache),
-    EarthHandler(state.earthCycle, auth, cache),
-    CambionHandler(state.cambionCycle, auth, cache),
-    Invasionhandler(state.invasions, auth, cache),
-    OrbiterNewsHandler(state.news, auth, cache),
-    SortieHandler(state.sortie, auth, cache),
-    ArchonHandler(state.archonHunt, auth, cache),
-    VallisHandler(state.vallisCycle, auth, cache),
-    FissuresHandler(state.fissures, auth, cache),
-  ];
-
-  for (final handler in handlers) {
-    await handler.notify();
   }
 }

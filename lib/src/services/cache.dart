@@ -1,25 +1,35 @@
-import 'dart:io';
+import 'dart:async';
 
-import 'package:hive/hive.dart';
+import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 
-class MessageIdCache {
-  static Box<List<String>>? _box;
-  static MessageIdCache? _instance;
+abstract class IdCache {
+  FutureOr<String?> get(String key);
 
-  static Future<MessageIdCache> init() async {
-    final temp = Directory.systemTemp;
+  FutureOr<void> set({
+    required String key,
+    required DateTime value,
+    required DateTime expiry,
+  });
+}
 
-    Hive.init(temp.path);
-    _box ??= await Hive.openBox<List<String>>('id_cache');
+class RedisIdCache implements IdCache {
+  RedisIdCache(RedisClient client) : _client = client;
 
-    return _instance ??= MessageIdCache();
-  }
+  final RedisClient _client;
 
-  List<String> getAllIds(String key) {
-    return _box?.get(key) ?? <String>[];
-  }
+  @override
+  Future<String?> get(String key) => _client.get(key: key);
 
-  void addId(String key, List<String> ids) {
-    _box?.put(key, ids);
+  @override
+  Future<void> set({
+    required String key,
+    required DateTime value,
+    required DateTime expiry,
+  }) async {
+    await _client.set(
+      key: key,
+      value: value.toIso8601String(),
+      ttl: DateTime.timestamp().difference(expiry).abs(),
+    );
   }
 }
