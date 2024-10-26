@@ -26,7 +26,7 @@ class Invasionhandler extends MessageHandler {
       await cache.set(
         key: invasion.id,
         value: invasion.activation,
-        expiry: invasion.expiry!,
+        expiry: invasion.activation.add(const Duration(days: 7)),
       );
     }
   }
