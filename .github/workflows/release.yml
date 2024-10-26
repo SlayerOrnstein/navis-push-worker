@@ -37,6 +37,4 @@ jobs:
       
       - name: Push to dokku
         if: steps.semantic.outputs.new_release_published == 'true'
-        run: |
-          tailscale ssh orn@asgard \ 
-          dokku git:sync --build navis-push-worker https://github.com/SlayerOrnstein/navis-push-worker.git
+        run: tailscale ssh orn@asgard dokku git:sync --build navis-push-worker https://github.com/SlayerOrnstein/navis-push-worker.git
