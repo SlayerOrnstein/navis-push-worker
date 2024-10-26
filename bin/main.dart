@@ -13,9 +13,18 @@ Future<void> main() async {
   final projectId = Platform.environment['FIREBASE_PROJECT'];
   if (projectId == null) throw Exception('FIREBASE_PROJECT not provided');
 
+  final redisUrl = Platform.environment['REDIS_URL'];
+  if (redisUrl == null) throw Exception('Missing REDIS_URL');
+
   try {
-    final redis = RedisClient(logger: RedisMasonLogger());
+    final uri = Uri.parse(redisUrl);
+    final redis = RedisClient(
+      logger: RedisMasonLogger(),
+      socket: RedisSocketOptions(host: uri.host, port: uri.port),
+    );
+
     await redis.connect();
+    await redis.auth(password: uri.userInfo.replaceAll(':', ''));
 
     final client = WarframestatWebsocket.connect();
     final adminApp = FirebaseAdminApp.initializeApp(
