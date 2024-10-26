@@ -37,7 +37,6 @@ jobs:
       
       - name: Push to dokku
         if: steps.semantic.outputs.new_release_published == 'true'
-        uses: dokku/github-action@v1.6.1
-        with:
-          git_remote_url: ${{ secrets.GIT_REMOTE_URL }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          tailscale ssh orn@asgard \ 
+          dokku git:sync --build navis-push-worker https://github.com/SlayerOrnstein/navis-push-worker.git
