@@ -16,6 +16,9 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.CI_GITHUB_TOKEN }}
 
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@v1.7.0  
+
       - name: Semantic Release
         id: semantic
         uses: cycjimmy/semantic-release-action@v4
