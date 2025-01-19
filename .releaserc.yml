@@ -8,6 +8,6 @@ plugins:
     - publishPub: false
   - - "@semantic-release/git"
     - assets: ["pubspec.yaml"]
-      message: "chore(release): ${nextRelease.version}"
+      message: "chore(release): ${nextRelease.version} [skip ci]"
 branches:
   - master
