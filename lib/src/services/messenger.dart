@@ -29,7 +29,7 @@ class FirebaseMessenger {
     try {
       await _messaging.send(topicMessage);
       logger.success('successfully pushed message for $topic');
-    } catch (e) {
+    } on Exception {
       logger.err('failed push to $topic');
     }
   }

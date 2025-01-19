@@ -50,7 +50,7 @@ Future<void> main() async {
       ..addHandler((state) => ArchonHandler(state.archonHunt))
       ..addHandler((state) => VallisHandler(state.vallisCycle))
       ..addHandler((state) => FissuresHandler(state.fissures));
-  } catch (e) {
+  } on Exception catch (e) {
     logger.err(e.toString());
     exit(1);
   }

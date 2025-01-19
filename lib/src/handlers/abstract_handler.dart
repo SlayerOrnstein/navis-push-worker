@@ -1,3 +1,4 @@
+// I want the abstract class in this case
 // ignore_for_file: one_member_abstracts
 
 import 'dart:async';
