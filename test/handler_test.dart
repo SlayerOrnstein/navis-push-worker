@@ -15,11 +15,7 @@ class MockIdCache extends Mock implements IdCache {
   }
 
   @override
-  void set({
-    required String key,
-    required DateTime value,
-    required DateTime expiry,
-  }) {
+  void set({required String key, required DateTime value, Duration? ttl}) {
     _cache[key] = value.toIso8601String();
   }
 }

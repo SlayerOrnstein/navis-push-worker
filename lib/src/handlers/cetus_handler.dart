@@ -17,11 +17,6 @@ class CetusHandler extends MessageHandler {
     final message = CetusMessage(cetus);
 
     await send(message.topic, message.notification);
-
-    await cache.set(
-      key: cetus.id,
-      value: cetus.activation,
-      expiry: cetus.expiry,
-    );
+    await cache.set(key: cetus.id, value: cetus.activation);
   }
 }

@@ -15,12 +15,8 @@ class SentientOutpostHandler extends MessageHandler {
     if (activation != null) return;
 
     final message = SentientMessage(outpost);
-    await send(message.topic, message.notification);
 
-    await cache.set(
-      key: outpost.id,
-      value: outpost.activation!,
-      expiry: outpost.expiry!,
-    );
+    await send(message.topic, message.notification);
+    await cache.set(key: outpost.id, value: outpost.activation!);
   }
 }

@@ -17,11 +17,6 @@ class EarthHandler extends MessageHandler {
     final message = EarthMessage(earth);
 
     await send(message.topic, message.notification);
-
-    await cache.set(
-      key: earth.id,
-      value: earth.activation,
-      expiry: earth.expiry,
-    );
+    await cache.set(key: earth.id, value: earth.activation);
   }
 }

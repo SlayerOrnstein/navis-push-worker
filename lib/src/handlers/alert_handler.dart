@@ -18,11 +18,7 @@ class AlertHandler extends MessageHandler {
       final message = AlertMessage(alert);
 
       await send(message.topic, message.notification);
-      await cache.set(
-        key: alert.id,
-        value: alert.activation,
-        expiry: alert.expiry,
-      );
+      await cache.set(key: alert.id, value: alert.activation);
     }
   }
 }

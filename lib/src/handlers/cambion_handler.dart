@@ -17,10 +17,6 @@ class CambionHandler extends MessageHandler {
     final message = CambionMessage(cambion);
 
     await send(message.topic, message.notification);
-    await cache.set(
-      key: cambion.id,
-      value: cambion.activation,
-      expiry: cambion.expiry,
-    );
+    await cache.set(key: cambion.id, value: cambion.activation);
   }
 }

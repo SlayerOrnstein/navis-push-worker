@@ -17,11 +17,6 @@ class DuviriHandler extends MessageHandler {
     final message = DuviriMessage(duviriCycle);
 
     await send(message.topic, message.notification);
-
-    await cache.set(
-      key: duviriCycle.id,
-      value: duviriCycle.activation,
-      expiry: duviriCycle.expiry,
-    );
+    await cache.set(key: duviriCycle.id, value: duviriCycle.activation);
   }
 }

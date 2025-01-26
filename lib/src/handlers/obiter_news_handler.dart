@@ -16,13 +16,13 @@ class OrbiterNewsHandler extends MessageHandler {
       if (date != null) continue;
 
       final message = OrbiterNewsMessage(news);
-      await send(message.topic, message.notification);
 
+      await send(message.topic, message.notification);
       await cache.set(
         key: news.id!,
         value: news.date,
-        // News don't have expiry
-        expiry: news.date.add(const Duration(days: 1000)),
+        // News don't expire the same way that other objects do
+        ttl: const Duration(days: 186),
       );
     }
   }

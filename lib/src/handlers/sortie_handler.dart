@@ -15,12 +15,8 @@ class SortieHandler extends MessageHandler {
     if (activation != null) return;
 
     final message = SortieMessage(sortie);
-    await send(message.topic, message.notification);
 
-    await cache.set(
-      key: sortie.id,
-      value: sortie.activation,
-      expiry: sortie.expiry,
-    );
+    await send(message.topic, message.notification);
+    await cache.set(key: sortie.id, value: sortie.activation);
   }
 }

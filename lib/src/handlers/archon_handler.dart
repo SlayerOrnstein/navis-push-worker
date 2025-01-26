@@ -17,10 +17,6 @@ class ArchonHandler extends MessageHandler {
     final message = ArchonMessage(archon);
 
     await send(message.topic, message.notification);
-    await cache.set(
-      key: archon.id,
-      value: archon.activation,
-      expiry: archon.expiry,
-    );
+    await cache.set(key: archon.id, value: archon.activation);
   }
 }

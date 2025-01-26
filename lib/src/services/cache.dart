@@ -8,7 +8,7 @@ abstract class IdCache {
   FutureOr<void> set({
     required String key,
     required DateTime value,
-    required DateTime expiry,
+    Duration? ttl,
   });
 }
 
@@ -24,12 +24,14 @@ class RedisIdCache implements IdCache {
   Future<void> set({
     required String key,
     required DateTime value,
-    required DateTime expiry,
+    Duration? ttl,
   }) async {
+    final now = DateTime.timestamp();
+
     await _client.set(
       key: key,
       value: value.toIso8601String(),
-      ttl: DateTime.timestamp().difference(expiry).abs(),
+      ttl: ttl ?? now.add(const Duration(days: 7)).difference(now),
     );
   }
 }

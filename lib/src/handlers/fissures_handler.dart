@@ -18,12 +18,7 @@ class FissuresHandler extends MessageHandler {
       final message = FissureMessage(fissure);
 
       await send(message.topic, message.notification);
-
-      await cache.set(
-        key: fissure.id,
-        value: fissure.activation,
-        expiry: fissure.expiry,
-      );
+      await cache.set(key: fissure.id, value: fissure.activation);
     }
   }
 }

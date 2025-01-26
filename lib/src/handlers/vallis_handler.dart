@@ -15,12 +15,8 @@ class VallisHandler extends MessageHandler {
     if (activation != null) return;
 
     final message = VallisMessage(vallis);
-    await send(message.topic, message.notification);
 
-    await cache.set(
-      key: vallis.id,
-      value: vallis.activation,
-      expiry: vallis.expiry,
-    );
+    await send(message.topic, message.notification);
+    await cache.set(key: vallis.id, value: vallis.activation);
   }
 }

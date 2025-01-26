@@ -18,12 +18,7 @@ class DarvoDealHandler extends MessageHandler {
       final message = DarvoMessage(deal);
 
       await send(message.topic, message.notification);
-
-      await cache.set(
-        key: deal.id,
-        value: deal.activation,
-        expiry: deal.expiry,
-      );
+      await cache.set(key: deal.id, value: deal.activation);
     }
   }
 }

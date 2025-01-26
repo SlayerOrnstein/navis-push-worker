@@ -23,11 +23,7 @@ class Invasionhandler extends MessageHandler {
         await send(attacker.topic, attacker.notification);
       }
 
-      await cache.set(
-        key: invasion.id,
-        value: invasion.activation,
-        expiry: invasion.activation.add(const Duration(days: 7)),
-      );
+      await cache.set(key: invasion.id, value: invasion.activation);
     }
   }
 }
