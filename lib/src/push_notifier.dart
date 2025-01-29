@@ -21,7 +21,7 @@ class PushNotifier {
     const delay = Duration(seconds: 60);
 
     websocket
-        .worldstateEvents()
+        .worldstate()
         .distinct((p, n) => n.timestamp.difference(p.timestamp) < delay)
         .listen(_startDispatch);
   }
