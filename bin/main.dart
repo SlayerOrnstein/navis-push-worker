@@ -26,7 +26,7 @@ Future<void> main() async {
     await redis.connect();
     await redis.auth(password: uri.userInfo.replaceAll(':', ''));
 
-    final client = WarframestatWebsocket.connect();
+    final client = WarframestatWebsocket();
     final adminApp = FirebaseAdminApp.initializeApp(
       projectId,
       getServiceAccount(),
