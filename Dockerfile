@@ -1,4 +1,4 @@
-FROM dart:3.6.1-sdk AS build
+FROM dart:3.7.0-323.2.beta-sdk AS build
 
 # Resolve app dependencies.
 WORKDIR /app
