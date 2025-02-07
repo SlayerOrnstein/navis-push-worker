@@ -95,13 +95,13 @@ packages:
     source: hosted
     version: "1.9.0"
   crypto:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: crypto
-      sha256: "1dceb0cf05cb63a7852c11560060e53ec2f182079a16ced6f4395c5b0875baf8"
+      sha256: "1e445881f28f22d6140f181e07737b22f1e099a5e1ff94b0af2f9e4a463f4855"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.4"
+    version: "3.0.6"
   dart_firebase_admin:
     dependency: "direct main"
     description:
@@ -554,10 +554,10 @@ packages:
     dependency: "direct main"
     description:
       name: warframestat_client
-      sha256: "2a02ab7620ec7827585fa72a91a87f3ebf343b5c129f8c8796a721a05d73a08c"
+      sha256: e1a24e54ea9f3d963124c5aec214587efa11382dbfbedf3b3688a4f53302a2b7
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.0"
+    version: "4.0.1"
   watcher:
     dependency: transitive
     description:

@@ -111,18 +111,25 @@ Future<void> main() async {
   test(
     'Test FissureHandler()',
     () async {
+      final dups = <Fissure>[];
       for (final fissure in worldstate.fissures) {
         final message = FissureMessage(fissure);
-        messages[message.body] = message.title;
+        // Fissures can have the same title so use remove the instances
+        if (messages.containsKey(message.title)) {
+          dups.add(fissure);
+          continue;
+        }
+
+        messages[message.title] = message.body;
       }
 
-      // Fissures can have the same title so use the body as the key instead
       void send(String topic, Notification notification) {
-        final message = messages[notification.body];
-        expect(message, notification.title);
+        final message = messages[notification.title];
+        expect(message, notification.body);
       }
 
-      await FissuresHandler(worldstate.fissures).notify(send, cache);
+      await FissuresHandler(worldstate.fissures..removeWhere(dups.contains))
+          .notify(send, cache);
     },
     skip: worldstate.fissures.isEmpty,
   );
