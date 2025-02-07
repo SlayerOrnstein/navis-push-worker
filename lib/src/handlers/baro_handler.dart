@@ -11,14 +11,15 @@ class BaroHandler extends MessageHandler {
 
   @override
   Future<void> notify(Send send, IdCache cache) async {
-    for (final trader in traders) {
-      final activation = await cache.get(trader.id);
+    for (final trader in traders.where((t) => t.active)) {
+      final id = '${trader.id}-${trader.activation}-${trader.expiry}';
+      final activation = await cache.get(id);
       if (activation != null) continue;
 
       final message = BaroMessage(trader);
 
       await send(message.topic, message.notification);
-      await cache.set(key: trader.id, value: trader.activation);
+      await cache.set(key: id, value: trader.activation);
     }
   }
 }
