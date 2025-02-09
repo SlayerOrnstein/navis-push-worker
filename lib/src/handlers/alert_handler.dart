@@ -12,6 +12,8 @@ class AlertHandler extends MessageHandler {
   @override
   Future<void> notify(Send send, IdCache cache) async {
     for (final alert in alerts) {
+      if (alert.tag == 'JadeShadows') continue;
+
       final activation = await cache.get(alert.id);
       if (activation != null) continue;
 
