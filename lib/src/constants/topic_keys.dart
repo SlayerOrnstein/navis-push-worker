@@ -16,6 +16,7 @@ class NotificationKeys {
   static const String fearKey = 'duviri_fear';
 
   static const String alertsKey = 'rare_alerts';
+  static const String operationAlertsKey = 'operation_alerts';
   static const String baroKey = 'baro';
   static const String darvoKey = 'darvo';
   static const String sortiesKey = 'sorties';

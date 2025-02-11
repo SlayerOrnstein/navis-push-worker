@@ -7,6 +7,9 @@ class AlertMessage extends MessageBase {
 
   final Alert alert;
 
+  // Tags are found in alert[index].tag.
+  static const _operationTags = ['JadeShadows'];
+
   @override
   String get body {
     return '${alert.mission.type} (${alert.mission.faction})'
@@ -16,7 +19,9 @@ class AlertMessage extends MessageBase {
   }
 
   @override
-  String get topic => NotificationKeys.alertsKey;
+  String get topic => _operationTags.contains(alert.tag)
+      ? NotificationKeys.operationAlertsKey
+      : NotificationKeys.alertsKey;
 
   @override
   String get title => alert.mission.node;
