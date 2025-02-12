@@ -37,12 +37,28 @@ Future<void> main() async {
   test(
     'Test AlertHandler()',
     () async {
+      final handler = AlertHandler(worldstate.events, worldstate.alerts);
+
+      final dups = <Alert>[];
       for (final alert in worldstate.alerts) {
-        final message = AlertMessage(alert);
+        final operation = handler.operation(alert.tag ?? '0000');
+        MessageBase message = AlertMessage(alert);
+        if (AlertHandler.operationTags.contains(alert.tag) &&
+            operation != null) {
+          message = OperationAlertMessage(operation, alert);
+        }
+
+        if (messages.containsKey(message.title)) {
+          dups.add(alert);
+          continue;
+        }
+
         messages[message.title] = message.body;
       }
 
-      await AlertHandler(worldstate.alerts).notify(send, cache);
+      worldstate.alerts.removeWhere(dups.contains);
+      await AlertHandler(worldstate.events, worldstate.alerts)
+          .notify(send, cache);
     },
     skip: worldstate.alerts.isEmpty,
   );

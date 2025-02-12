@@ -8,6 +8,8 @@ export 'duviri_message.dart';
 export 'earth_message.dart';
 export 'fissure_message.dart';
 export 'invasion_message.dart';
+export 'message_base.dart';
+export 'operation_alert.dart';
 export 'orbiter_news_message.dart';
 export 'sentient_message.dart';
 export 'sortie_message.dart';

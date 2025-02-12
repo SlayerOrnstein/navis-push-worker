@@ -37,7 +37,7 @@ Future<void> main() async {
 
     logger.info('starting push notification worker');
     PushNotifier(websocket: client, auth: messenger, cache: cache)
-      ..addHandler((state) => AlertHandler(state.alerts))
+      ..addHandler((state) => AlertHandler(state.events, state.alerts))
       ..addHandler((state) => BaroHandler(state.voidTraders))
       ..addHandler((state) => CetusHandler(state.cetusCycle))
       ..addHandler((state) => DarvoDealHandler(state.dailyDeals))
