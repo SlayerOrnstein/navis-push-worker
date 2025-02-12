@@ -11,7 +11,7 @@ class OperationAlertMessage extends MessageBase {
   String get body {
     final mission = alert.mission;
 
-    return '${mission.node} - ${mission.faction}\n${mission.type} '
+    return '${mission.node} - ${mission.faction}\n${mission.type} | '
         'Level ${alert.mission.minEnemyLevel} - ${alert.mission.maxEnemyLevel}'
         '\n${alert.mission.reward!.itemString}';
   }
