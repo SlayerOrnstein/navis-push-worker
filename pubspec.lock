@@ -46,6 +46,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.0"
+  asn1lib:
+    dependency: transitive
+    description:
+      name: asn1lib
+      sha256: e02d018628c870ef2d7f03e33f9ad179d89ff6ec52ca6c56bcb80bcef979867f
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.6.2"
   async:
     dependency: transitive
     description:
@@ -66,10 +74,10 @@ packages:
     dependency: transitive
     description:
       name: clock
-      sha256: cb6d7f03e1de671e34607e909a7213e31d7752be4fb66a86d29fe1eb14bfb5cf
+      sha256: fddb70d9b5277016c77a80201021d40a2247104d9f4aa7bab7157b7e3f05b84b
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.1"
+    version: "1.1.2"
   collection:
     dependency: "direct main"
     description:
@@ -82,10 +90,10 @@ packages:
     dependency: transitive
     description:
       name: convert
-      sha256: "0f08b14755d163f6e2134cb58222dd25ea2a2ee8a195e53983d57c075324d592"
+      sha256: b30acd5944035672bc15c6b7a8b47d773e41e2f17de064350988c5d02adb1c68
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.1"
+    version: "3.1.2"
   coverage:
     dependency: transitive
     description:
@@ -102,22 +110,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.6"
+  crypto_keys:
+    dependency: transitive
+    description:
+      name: crypto_keys
+      sha256: acc19abf34623d990a0e8aec69463d74a824c31f137128f42e2810befc509ad0
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0+1"
   dart_firebase_admin:
     dependency: "direct main"
     description:
       name: dart_firebase_admin
-      sha256: a50cc3b6f976296ff76e75e7af7a0f22b51dc20b1b380cf4a19a91bb4f02a2c5
+      sha256: "99e0d27edd09803ed2cfb8bfa64f28f503bf4b14de609a5dc438cb23770b0b27"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.0"
+    version: "0.4.1"
   dart_jsonwebtoken:
     dependency: transitive
     description:
       name: dart_jsonwebtoken
-      sha256: adf073720e491d64fa599942615b919915710af2d809b2798146f9b7c4330f3f
+      sha256: b268ff9bb87a16360a397f1accb50e7c781384e1119010b34f6d7c25820c44d8
       url: "https://pub.dev"
     source: hosted
-    version: "2.14.1"
+    version: "3.1.1"
   ed25519_edwards:
     dependency: transitive
     description:
@@ -150,14 +166,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
-  firebaseapis:
-    dependency: transitive
-    description:
-      name: firebaseapis
-      sha256: "7e9663f298a209dc7d4e8a10944d6c39d43e02e9cade08c915720768d02d712d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
   fixnum:
     dependency: transitive
     description:
@@ -170,10 +178,10 @@ packages:
     dependency: transitive
     description:
       name: freezed_annotation
-      sha256: c2e2d632dd9b8a2b7751117abcfc2b4888ecfe181bd9fca7170d9ef02e595fe2
+      sha256: c87ff004c8aa6af2d531668b46a4ea379f7191dc6dfa066acd53d506da6e044b
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.4"
+    version: "3.0.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -214,6 +222,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.6.0"
+  googleapis_beta:
+    dependency: transitive
+    description:
+      name: googleapis_beta
+      sha256: "1a92969f28c4c0279687fa661306a0b0504c97d23effcb23a0ec8fe4ad84f85b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.0.0"
   hive:
     dependency: "direct main"
     description:
@@ -258,10 +274,10 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.19.0"
+    version: "0.20.2"
   io:
     dependency: transitive
     description:
@@ -270,6 +286,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  jose:
+    dependency: transitive
+    description:
+      name: jose
+      sha256: "7955ec5d131960104e81fbf151abacb9d835c16c9e793ed394b2809f28b2198d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.4"
   js:
     dependency: transitive
     description:
@@ -366,6 +390,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  pem:
+    dependency: transitive
+    description:
+      name: pem
+      sha256: "3dfb24524f805ad694ba3cdbb6387ab31ab661fdb8ea873052ed88487fcfef86"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
+  petitparser:
+    dependency: transitive
+    description:
+      name: petitparser
+      sha256: "07c8f0b1913bcde1ff0d26e57ace2f3012ccbf2b204e070290dad3bb22797646"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.0"
   pointycastle:
     dependency: transitive
     description:
@@ -390,6 +430,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      sha256: ea0b925899e64ecdfbf9c7becb60d5b50e706ade44a85b2363be2a22d88117d2
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.2"
   resp_client:
     dependency: transitive
     description:
@@ -614,6 +662,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.5.4"
+  x509:
+    dependency: transitive
+    description:
+      name: x509
+      sha256: cbd1a63846884afd273cda247b0365284c8d85a365ca98e110413f93d105b935
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.4+3"
   yaml:
     dependency: transitive
     description:
