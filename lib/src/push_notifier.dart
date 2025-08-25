@@ -16,12 +16,11 @@ class PushNotifier {
     required WarframestatWebsocket websocket,
     required FirebaseMessenger auth,
     required IdCache cache,
-  })  : _auth = auth,
-        _cache = cache {
+  }) : _auth = auth,
+       _cache = cache {
     const delay = Duration(seconds: 60);
 
-    websocket
-        .worldstate()
+    websocket.worldstate
         .distinct((p, n) => n.timestamp.difference(p.timestamp) < delay)
         .listen(_startDispatch);
   }

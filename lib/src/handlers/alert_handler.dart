@@ -16,7 +16,7 @@ class AlertHandler extends MessageHandler {
 
   WorldEvent? operation(String tag) {
     return events.firstWhereOrNull(
-      (i) => i.tag.toLowerCase().contains(tag.toLowerCase()),
+      (i) => i.tag?.toLowerCase().contains(tag.toLowerCase()) ?? false,
     );
   }
 
