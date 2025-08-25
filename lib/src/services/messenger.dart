@@ -4,7 +4,7 @@ import 'package:mason_logger/mason_logger.dart';
 
 class FirebaseMessenger {
   FirebaseMessenger({required FirebaseAdminApp admin, required this.projectId})
-      : _messaging = Messaging(admin);
+    : _messaging = Messaging(admin);
 
   final Messaging _messaging;
   final String projectId;

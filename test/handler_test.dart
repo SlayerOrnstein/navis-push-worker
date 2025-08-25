@@ -57,8 +57,10 @@ Future<void> main() async {
       }
 
       worldstate.alerts.removeWhere(dups.contains);
-      await AlertHandler(worldstate.events, worldstate.alerts)
-          .notify(send, cache);
+      await AlertHandler(
+        worldstate.events,
+        worldstate.alerts,
+      ).notify(send, cache);
     },
     skip: worldstate.alerts.isEmpty,
   );
@@ -144,8 +146,9 @@ Future<void> main() async {
         expect(message, notification.body);
       }
 
-      await FissuresHandler(worldstate.fissures..removeWhere(dups.contains))
-          .notify(send, cache);
+      await FissuresHandler(
+        worldstate.fissures..removeWhere(dups.contains),
+      ).notify(send, cache);
     },
     skip: worldstate.fissures.isEmpty,
   );
@@ -188,8 +191,9 @@ Future<void> main() async {
       final message = SentientMessage(worldstate.sentientOutposts!);
       messages[message.title] = message.body;
 
-      await SentientOutpostHandler(worldstate.sentientOutposts!)
-          .notify(send, cache);
+      await SentientOutpostHandler(
+        worldstate.sentientOutposts!,
+      ).notify(send, cache);
     },
     skip: worldstate.sentientOutposts == null,
   );

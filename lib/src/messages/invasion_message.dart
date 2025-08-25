@@ -23,8 +23,9 @@ class InvasionMessage extends MessageBase {
 
   @override
   String get body {
-    final opposingFaction =
-        isDefending ? invasion.attacker.faction : invasion.defender.faction;
+    final opposingFaction = isDefending
+        ? invasion.attacker.faction
+        : invasion.defender.faction;
 
     final reward = isDefending
         ? invasion.defender.reward!.itemString

@@ -10,9 +10,9 @@ import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 String? getResourceKey(String value) {
   return NotificationKeys.resources.keys.firstWhereOrNull(
     (k) {
-      return value
-          .toLowerCase()
-          .contains(NotificationKeys.resources[k]!.toLowerCase());
+      return value.toLowerCase().contains(
+        NotificationKeys.resources[k]!.toLowerCase(),
+      );
     },
   );
 }
