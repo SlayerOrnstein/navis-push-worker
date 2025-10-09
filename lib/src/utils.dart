@@ -7,7 +7,9 @@ import 'package:mason_logger/mason_logger.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 
-String? getResourceKey(String value) {
+String? getResourceKey(String? value) {
+  if (value == null) return null;
+
   return NotificationKeys.resources.keys.firstWhereOrNull(
     (k) {
       return value.toLowerCase().contains(
