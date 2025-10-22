@@ -18,7 +18,10 @@ dependencies:
   mason_logger: ^0.3.3
   shorebird_redis_client: ^0.0.10
   time: ^2.1.4
-  warframestat_client: ^5.3.4
+  worldstate_models:
+    git:
+      url: https://github.com/SlayerOrnstein/wfcd_dart.git
+      path: packages/worldstate_models
 
 dev_dependencies:
   husky: ^0.1.7

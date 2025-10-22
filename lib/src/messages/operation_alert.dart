@@ -1,5 +1,5 @@
 import 'package:navis_push_worker/navis_push_worker.dart';
-import 'package:warframestat_client/warframestat_client.dart';
+import 'package:worldstate_models/worldstate_models.dart';
 
 class OperationAlertMessage extends MessageBase {
   OperationAlertMessage(this.event, this.alert);
@@ -13,7 +13,7 @@ class OperationAlertMessage extends MessageBase {
 
     return '${mission.node} - ${mission.faction}\n${mission.type} | '
         'Level ${alert.mission.minEnemyLevel} - ${alert.mission.maxEnemyLevel}'
-        '\n${alert.mission.reward!.itemString}';
+        '\n${alert.mission.reward.itemString}';
   }
 
   @override

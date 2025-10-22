@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/handlers/abstract_handler.dart';
 import 'package:navis_push_worker/src/messages/messages.dart';
 import 'package:navis_push_worker/src/push_notifier.dart';
 import 'package:navis_push_worker/src/services/services.dart';
-import 'package:warframestat_client/warframestat_client.dart';
+import 'package:worldstate_models/worldstate_models.dart';
 
 class BaroHandler extends MessageHandler {
   BaroHandler(this.traders);
@@ -14,8 +14,8 @@ class BaroHandler extends MessageHandler {
 
   @override
   Future<void> notify(Send send, IdCache cache) async {
-    for (final trader in traders.where((t) => t.active)) {
-      final items = trader.inventory.map((i) => i.uniqueName);
+    for (final trader in traders.where((t) => t.isActive)) {
+      final items = trader.inventory.map((i) => i.name);
       final bytes = utf8.encode(items.join());
       final digest = sha256.convert(bytes).toString();
 

@@ -3,7 +3,7 @@ import 'package:navis_push_worker/src/handlers/abstract_handler.dart';
 import 'package:navis_push_worker/src/messages/messages.dart';
 import 'package:navis_push_worker/src/push_notifier.dart';
 import 'package:navis_push_worker/src/services/services.dart';
-import 'package:warframestat_client/warframestat_client.dart';
+import 'package:worldstate_models/worldstate_models.dart';
 
 class AlertHandler extends MessageHandler {
   AlertHandler(this.events, this.alerts);
@@ -16,7 +16,7 @@ class AlertHandler extends MessageHandler {
 
   WorldEvent? operation(String tag) {
     return events.firstWhereOrNull(
-      (i) => i.tag?.toLowerCase().contains(tag.toLowerCase()) ?? false,
+      (i) => i.tag.toLowerCase().contains(tag.toLowerCase()),
     );
   }
 
@@ -26,7 +26,7 @@ class AlertHandler extends MessageHandler {
       final activation = await cache.get(alert.id);
       if (activation != null) continue;
 
-      final operation = this.operation(alert.tag ?? '0000');
+      final operation = this.operation(alert.tag);
       MessageBase message = AlertMessage(alert);
       if (operationTags.contains(alert.tag) && operation != null) {
         message = OperationAlertMessage(operation, alert);

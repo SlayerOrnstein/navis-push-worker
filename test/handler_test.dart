@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:isolate';
 
 import 'package:dart_firebase_admin/messaging.dart';
+import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:navis_push_worker/navis_push_worker.dart';
 import 'package:test/test.dart';
-import 'package:warframestat_client/warframestat_client.dart';
+import 'package:worldstate_models/worldstate_models.dart';
 
 class MockIdCache extends Mock implements IdCache {
   final _cache = <String, String>{};
@@ -20,10 +23,21 @@ class MockIdCache extends Mock implements IdCache {
   }
 }
 
+Future<Worldstate> fetchWorldstate() async {
+  final response = await http.get(
+    Uri.parse('https://api.warframe.com/cdn/worldState.php'),
+  );
+
+  return Isolate.run(
+    () async => RawWorldstate.fromMap(
+      jsonDecode(response.body) as Map<String, dynamic>,
+    ).toWorldstate(),
+  );
+}
+
 Future<void> main() async {
   final cache = MockIdCache();
-  final client = WorldstateClient();
-  final worldstate = await client.fetchWorldstate();
+  final worldstate = await fetchWorldstate();
 
   final messages = <String, String>{};
 
@@ -41,7 +55,7 @@ Future<void> main() async {
 
       final dups = <Alert>[];
       for (final alert in worldstate.alerts) {
-        final operation = handler.operation(alert.tag ?? '0000');
+        final operation = handler.operation(alert.tag);
         MessageBase message = AlertMessage(alert);
         if (AlertHandler.operationTags.contains(alert.tag) &&
             operation != null) {
@@ -119,17 +133,10 @@ Future<void> main() async {
     await DuviriHandler(worldstate.duviriCycle).notify(send, cache);
   });
 
-  test('Test EarthHandler()', () async {
-    final message = EarthMessage(worldstate.earthCycle);
-    messages[message.title] = message.body;
-
-    await EarthHandler(worldstate.earthCycle).notify(send, cache);
-  });
-
   test(
     'Test FissureHandler()',
     () async {
-      final dups = <Fissure>[];
+      final dups = <VoidFissure>[];
       for (final fissure in worldstate.fissures) {
         final message = FissureMessage(fissure);
         // Fissures can have the same title so use remove the instances
@@ -185,18 +192,14 @@ Future<void> main() async {
     skip: worldstate.news.isEmpty,
   );
 
-  test(
-    'Test SentientOutpostHandler()',
-    () async {
-      final message = SentientMessage(worldstate.sentientOutposts!);
-      messages[message.title] = message.body;
+  test('Test SentientOutpostHandler()', () async {
+    final message = SentientMessage(worldstate.sentientOutpost);
+    messages[message.title] = message.body;
 
-      await SentientOutpostHandler(
-        worldstate.sentientOutposts!,
-      ).notify(send, cache);
-    },
-    skip: worldstate.sentientOutposts == null,
-  );
+    await SentientOutpostHandler(
+      worldstate.sentientOutpost,
+    ).notify(send, cache);
+  });
 
   test('Test SortieHandler()', () async {
     final message = SortieMessage(worldstate.sortie);

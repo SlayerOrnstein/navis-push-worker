@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:isolate';
 
 import 'package:dart_firebase_admin/messaging.dart';
+import 'package:http/http.dart' as http;
 import 'package:navis_push_worker/src/handlers/handlers.dart';
 import 'package:navis_push_worker/src/services/services.dart';
-import 'package:warframestat_client/warframestat_client.dart';
+import 'package:worldstate_models/worldstate_models.dart';
 
 typedef Send = FutureOr<void> Function(String topic, Notification notification);
 
@@ -13,16 +16,16 @@ typedef BuildHandler = MessageHandler Function(Worldstate state);
 
 class PushNotifier {
   PushNotifier({
-    required WarframestatWebsocket websocket,
     required FirebaseMessenger auth,
     required IdCache cache,
   }) : _auth = auth,
        _cache = cache {
     const delay = Duration(seconds: 60);
 
-    websocket.worldstate
-        .distinct((p, n) => n.timestamp.difference(p.timestamp) < delay)
-        .listen(_startDispatch);
+    Stream<Future<Worldstate>>.periodic(
+      delay,
+      (_) => _fetchWorldstate(),
+    ).asyncMap((fw) async => fw).listen(_startDispatch);
   }
 
   final FirebaseMessenger _auth;
@@ -35,5 +38,17 @@ class PushNotifier {
     for (final handler in _handlers) {
       await handler(worldstate).notify(_auth.send, _cache);
     }
+  }
+
+  Future<Worldstate> _fetchWorldstate() async {
+    final response = await http.get(
+      Uri.parse('https://api.warframe.com/cdn/worldState.php'),
+    );
+
+    return Isolate.run(
+      () async => RawWorldstate.fromMap(
+        jsonDecode(response.body) as Map<String, dynamic>,
+      ).toWorldstate(),
+    );
   }
 }

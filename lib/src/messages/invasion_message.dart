@@ -1,6 +1,6 @@
 import 'package:navis_push_worker/src/messages/message_base.dart';
 import 'package:navis_push_worker/src/utils.dart';
-import 'package:warframestat_client/warframestat_client.dart';
+import 'package:worldstate_models/worldstate_models.dart';
 
 class InvasionMessage extends MessageBase {
   InvasionMessage(this.invasion, {this.isDefending = true});
@@ -13,7 +13,7 @@ class InvasionMessage extends MessageBase {
 
   @override
   String get topic {
-    return getResourceKey(_invasionFaction.reward!.countedItems.first.key)!;
+    return getResourceKey(_invasionFaction.reward!.countedItems?.first.key)!;
   }
 
   @override

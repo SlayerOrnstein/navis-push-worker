@@ -6,7 +6,6 @@ export 'cambion_handler.dart';
 export 'cetus_handler.dart';
 export 'darvo_handler.dart';
 export 'duviri_handler.dart';
-export 'earth_handler.dart';
 export 'fissures_handler.dart';
 export 'invasion_handler.dart';
 export 'obiter_news_handler.dart';

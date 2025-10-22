@@ -1,6 +1,6 @@
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:navis_push_worker/src/messages/message_base.dart';
-import 'package:warframestat_client/warframestat_client.dart';
+import 'package:worldstate_models/worldstate_models.dart';
 
 class OrbiterNewsMessage extends MessageBase {
   OrbiterNewsMessage(this.news);
@@ -12,16 +12,16 @@ class OrbiterNewsMessage extends MessageBase {
 
   @override
   String get topic {
-    if (news.primeAccess) return NotificationKeys.newsUpdateKey;
-    if (news.stream) return NotificationKeys.newsStreamKey;
+    if (news.isPrimeAccess) return NotificationKeys.newsUpdateKey;
+    if (news.isStream) return NotificationKeys.newsStreamKey;
 
     return NotificationKeys.newsPrimeKey;
   }
 
   @override
   String get title {
-    if (news.primeAccess) return 'Warframe Update';
-    if (news.stream) return 'Warframe Stream';
+    if (news.isPrimeAccess) return 'Warframe Update';
+    if (news.isStream) return 'Warframe Stream';
 
     return 'Warframe Prime access';
   }

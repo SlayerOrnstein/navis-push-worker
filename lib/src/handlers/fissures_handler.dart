@@ -2,12 +2,12 @@ import 'package:navis_push_worker/src/handlers/abstract_handler.dart';
 import 'package:navis_push_worker/src/messages/messages.dart';
 import 'package:navis_push_worker/src/push_notifier.dart';
 import 'package:navis_push_worker/src/services/services.dart';
-import 'package:warframestat_client/warframestat_client.dart';
+import 'package:worldstate_models/worldstate_models.dart';
 
 class FissuresHandler extends MessageHandler {
   FissuresHandler(this.fissures);
 
-  final List<Fissure> fissures;
+  final List<VoidFissure> fissures;
 
   @override
   Future<void> notify(Send send, IdCache cache) async {
