@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:isolate';
 
 import 'package:dart_firebase_admin/messaging.dart';
 import 'package:http/http.dart' as http;
 import 'package:navis_push_worker/src/handlers/handlers.dart';
 import 'package:navis_push_worker/src/services/services.dart';
+import 'package:warframe_drop_data/warframe_drop_data.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 typedef Send = FutureOr<void> Function(String topic, Notification notification);
@@ -45,10 +45,13 @@ class PushNotifier {
       Uri.parse('https://api.warframe.com/cdn/worldState.php'),
     );
 
-    return Isolate.run(
-      () async => RawWorldstate.fromMap(
-        jsonDecode(response.body) as Map<String, dynamic>,
-      ).toWorldstate(),
+    // Drop data isn't needed for now so it's alright to just leave it empty
+    final deps = Dependency(
+      DropData(blueprintDrops: [], bountyRewardTables: []),
     );
+
+    return RawWorldstate.fromMap(
+      jsonDecode(response.body) as Map<String, dynamic>,
+    ).toWorldstate(deps);
   }
 }
