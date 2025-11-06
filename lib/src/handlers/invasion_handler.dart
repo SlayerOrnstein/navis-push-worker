@@ -11,7 +11,7 @@ class Invasionhandler extends MessageHandler {
 
   @override
   Future<void> notify(Send send, IdCache cache) async {
-    for (final invasion in invasions) {
+    for (final invasion in invasions.where((i) => i.isActive)) {
       final activation = await cache.get(invasion.id);
       if (activation != null) continue;
 

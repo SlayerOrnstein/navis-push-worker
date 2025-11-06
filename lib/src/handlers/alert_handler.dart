@@ -22,7 +22,7 @@ class AlertHandler extends MessageHandler {
 
   @override
   Future<void> notify(Send send, IdCache cache) async {
-    for (final alert in alerts) {
+    for (final alert in alerts.where((i) => i.isActive)) {
       final activation = await cache.get(alert.id);
       if (activation != null) continue;
 

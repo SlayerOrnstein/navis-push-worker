@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:navis_push_worker/navis_push_worker.dart';
 import 'package:test/test.dart';
-import 'package:warframe_drop_data/warframe_drop_data.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class MockIdCache extends Mock implements IdCache {
@@ -29,9 +28,7 @@ Future<Worldstate> fetchWorldstate() async {
   );
 
   // Drop data isn't needed for now so it's alright to just leave it empty
-  final deps = Dependency(
-    DropData(blueprintDrops: [], bountyRewardTables: []),
-  );
+  final deps = Dependency([]);
 
   return RawWorldstate.fromMap(
     jsonDecode(response.body) as Map<String, dynamic>,

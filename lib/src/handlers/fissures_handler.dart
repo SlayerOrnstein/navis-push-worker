@@ -11,7 +11,7 @@ class FissuresHandler extends MessageHandler {
 
   @override
   Future<void> notify(Send send, IdCache cache) async {
-    for (final fissure in fissures) {
+    for (final fissure in fissures.where((i) => i.isActive)) {
       final activation = await cache.get(fissure.id);
       if (activation != null) continue;
 
