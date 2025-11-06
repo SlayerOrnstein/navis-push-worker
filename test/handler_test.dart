@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
+import 'dart:io';
 
 import 'package:dart_firebase_admin/messaging.dart';
-import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:navis_push_worker/navis_push_worker.dart';
 import 'package:test/test.dart';
@@ -22,22 +21,10 @@ class MockIdCache extends Mock implements IdCache {
   }
 }
 
-Future<Worldstate> fetchWorldstate() async {
-  final response = await http.get(
-    Uri.parse('https://api.warframe.com/cdn/worldState.php'),
-  );
-
-  // Drop data isn't needed for now so it's alright to just leave it empty
-  final deps = Dependency([]);
-
-  return RawWorldstate.fromMap(
-    jsonDecode(response.body) as Map<String, dynamic>,
-  ).toWorldstate(deps);
-}
-
 Future<void> main() async {
   final cache = MockIdCache();
-  final worldstate = await fetchWorldstate();
+  final json = File('./test/fixtures/worldstate.json').readAsStringSync();
+  final worldstate = Worldstate.fromJson(json);
 
   final messages = <String, String>{};
 
