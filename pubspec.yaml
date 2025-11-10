@@ -13,7 +13,7 @@ dependencies:
   googleapis: ^15.0.0
   googleapis_auth: ^1.6.0
   hive: ^2.2.3
-  http: ^1.5.0
+  http: ^1.6.0
   intl: ^0.19.0
   mason_logger: ^0.3.3
   shorebird_redis_client: ^0.0.10
