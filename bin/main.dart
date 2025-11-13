@@ -7,7 +7,7 @@ import 'package:navis_push_worker/navis_push_worker.dart';
 import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 
 Future<void> main() async {
-  final logger = Logger(filter: ProductionFilter(), level: Level.error);
+  final logger = Logger(filter: ProductionFilter());
 
   final projectId = Platform.environment['FIREBASE_PROJECT'];
   if (projectId == null) throw Exception('FIREBASE_PROJECT not provided');
