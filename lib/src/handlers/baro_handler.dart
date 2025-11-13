@@ -15,7 +15,9 @@ class BaroHandler extends MessageHandler {
   @override
   Future<void> notify(Send send, IdCache cache) async {
     for (final trader in traders.where((t) => t.isActive)) {
-      final items = trader.inventory.map((i) => i.name);
+      final items = trader.inventory?.map((i) => i.name);
+      if (items == null) continue;
+
       final bytes = utf8.encode(items.join());
       final digest = sha256.convert(bytes).toString();
 

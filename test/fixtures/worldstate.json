@@ -7339,7 +7339,7 @@
             "count": -45131,
             "requiredRuns": 45000,
             "completion": -1,
-            "isCompleted": true,
+            "isComplete": true,
             "rewardTypes": [
                 "Detonite Injector",
                 "Fieldron"
@@ -7383,7 +7383,7 @@
             "count": -25458,
             "requiredRuns": 30000,
             "completion": 7,
-            "isCompleted": false,
+            "isComplete": false,
             "rewardTypes": [
                 "Sheev Blade",
                 "Snipetron Vandal Blueprint"
@@ -7418,7 +7418,7 @@
             "count": -27475,
             "requiredRuns": 30000,
             "completion": 8,
-            "isCompleted": false,
+            "isComplete": false,
             "rewardTypes": [
                 "Mutalist Alad V Nav Coordinate"
             ]
@@ -7452,7 +7452,7 @@
             "count": -29202,
             "requiredRuns": 30000,
             "completion": 2,
-            "isCompleted": false,
+            "isComplete": false,
             "rewardTypes": [
                 "Fieldron"
             ]
@@ -7495,7 +7495,7 @@
             "count": -10677,
             "requiredRuns": 82000,
             "completion": 43,
-            "isCompleted": false,
+            "isComplete": false,
             "rewardTypes": [
                 "Forma Blueprint",
                 "Orokin Reactor Blueprint"
