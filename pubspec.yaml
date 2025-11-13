@@ -1,6 +1,6 @@
 name: navis_push_worker
 description: A Very Good Project created by Very Good CLI.
-version: 2.2.20
+version: 2.2.21
 publish_to: none
 
 environment:
