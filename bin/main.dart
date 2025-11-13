@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dart_firebase_admin/dart_firebase_admin.dart';
-import 'package:mason_logger/mason_logger.dart';
+import 'package:logger/logger.dart';
 import 'package:navis_push_worker/navis_push_worker.dart';
 import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 
@@ -18,7 +18,7 @@ Future<void> main() async {
   try {
     final uri = Uri.parse(redisUrl);
     final redis = RedisClient(
-      logger: RedisMasonLogger(),
+      logger: RedisCustomLogger(logger),
       socket: RedisSocketOptions(host: uri.host, port: uri.port),
     );
 
@@ -30,11 +30,11 @@ Future<void> main() async {
       getServiceAccount(),
     );
 
-    final messenger = FirebaseMessenger(admin: adminApp, projectId: projectId);
+    final messenger = FirebaseMessenger(admin: adminApp, logger: logger);
     final cache = RedisIdCache(redis);
 
-    logger.info('starting push notification worker');
-    PushNotifier(auth: messenger, cache: cache)
+    logger.i('starting push notification worker');
+    PushNotifier(auth: messenger, cache: cache, logger: logger)
       ..addHandler((state) => AlertHandler(state.events, state.alerts))
       ..addHandler((state) => BaroHandler(state.voidTraders))
       ..addHandler((state) => CetusHandler(state.cetusCycle))
@@ -48,7 +48,7 @@ Future<void> main() async {
       ..addHandler((state) => VallisHandler(state.vallisCycle))
       ..addHandler((state) => FissuresHandler(state.fissures));
   } on Exception catch (e) {
-    logger.err(e.toString());
+    logger.e(e.toString());
     exit(1);
   }
 }

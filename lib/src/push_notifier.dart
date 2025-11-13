@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:dart_firebase_admin/messaging.dart';
 import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
 import 'package:navis_push_worker/src/handlers/handlers.dart';
 import 'package:navis_push_worker/src/services/services.dart';
 import 'package:worldstate_models/worldstate_models.dart';
@@ -17,8 +18,10 @@ class PushNotifier {
   PushNotifier({
     required FirebaseMessenger auth,
     required IdCache cache,
+    required Logger logger,
   }) : _auth = auth,
-       _cache = cache {
+       _cache = cache,
+       _log = logger {
     const delay = Duration(seconds: 60);
 
     Stream<Future<Worldstate>>.periodic(
@@ -29,13 +32,19 @@ class PushNotifier {
 
   final FirebaseMessenger _auth;
   final IdCache _cache;
+  final Logger _log;
 
   final _handlers = <BuildHandler>[];
+
   void addHandler(BuildHandler handler) => _handlers.add(handler);
 
   Future<void> _startDispatch(Worldstate worldstate) async {
     for (final handler in _handlers) {
-      await handler(worldstate).notify(_auth.send, _cache);
+      try {
+        await handler(worldstate).notify(_auth.send, _cache);
+      } on Exception catch (e, stack) {
+        _log.e('Failed to run handler', error: e, stackTrace: stack);
+      }
     }
   }
 

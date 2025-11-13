@@ -1,15 +1,14 @@
 import 'package:dart_firebase_admin/dart_firebase_admin.dart';
 import 'package:dart_firebase_admin/messaging.dart';
-import 'package:mason_logger/mason_logger.dart';
+import 'package:logger/logger.dart';
 
 class FirebaseMessenger {
-  FirebaseMessenger({required FirebaseAdminApp admin, required this.projectId})
-    : _messaging = Messaging(admin);
+  FirebaseMessenger({required FirebaseAdminApp admin, required Logger logger})
+    : _messaging = Messaging(admin),
+      _logger = logger;
 
   final Messaging _messaging;
-  final String projectId;
-
-  final logger = Logger();
+  final Logger _logger;
 
   Future<void> send(String topic, Notification notification) async {
     final androidConfig = AndroidConfig(
@@ -28,9 +27,9 @@ class FirebaseMessenger {
 
     try {
       await _messaging.send(topicMessage);
-      logger.success('successfully pushed message for $topic');
-    } on Exception {
-      logger.err('failed push to $topic');
+      _logger.i('successfully pushed message for $topic');
+    } on Exception catch (e, stack) {
+      _logger.e('failed push to $topic', error: e, stackTrace: stack);
     }
   }
 }

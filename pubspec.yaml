@@ -15,7 +15,7 @@ dependencies:
   hive: ^2.2.3
   http: ^1.6.0
   intl: ^0.20.2
-  mason_logger: ^0.3.3
+  logger: ^2.6.2
   shorebird_redis_client: ^0.0.10
   time: ^2.1.4
   worldstate_models:

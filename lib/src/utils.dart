@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:dart_firebase_admin/dart_firebase_admin.dart';
-import 'package:mason_logger/mason_logger.dart';
+import 'package:logger/logger.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 
@@ -36,17 +36,19 @@ Credential getServiceAccount() {
   );
 }
 
-class RedisMasonLogger implements RedisLogger {
-  final _logger = Logger(level: Level.verbose);
+class RedisCustomLogger implements RedisLogger {
+  RedisCustomLogger(Logger logger) : _logger = logger;
+
+  final Logger _logger;
 
   @override
-  void debug(String message) => _logger.detail(message);
+  void debug(String message) => _logger.i(message);
 
   @override
   void error(String message, {Object? error, StackTrace? stackTrace}) {
-    _logger.err(message);
+    _logger.e(message, error: error, stackTrace: stackTrace);
   }
 
   @override
-  void info(String message) => _logger.info(message);
+  void info(String message) => _logger.i(message);
 }
