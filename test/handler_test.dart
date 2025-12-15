@@ -24,7 +24,7 @@ class MockIdCache extends Mock implements IdCache {
 Future<void> main() async {
   final cache = MockIdCache();
   final json = File('./test/fixtures/worldstate.json').readAsStringSync();
-  final worldstate = Worldstate.fromJson(json);
+  final worldstate = RawWorldstate.fromJson(json).toWorldstate(Dependency());
 
   final messages = <String, String>{};
 

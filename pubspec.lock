@@ -137,14 +137,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
-  csv:
-    dependency: transitive
-    description:
-      name: csv
-      sha256: c6aa2679b2a18cb57652920f674488d89712efaf4d3fdf2e537215b35fc19d6c
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.0"
   dart_firebase_admin:
     dependency: "direct main"
     description:
@@ -177,6 +169,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.1"
+  embed_annotation:
+    dependency: transitive
+    description:
+      name: embed_annotation
+      sha256: "0c0d498e3371b5de25d9928c14ae6cb16b15dd7831ae8804e6e263ba3e662bf8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.3"
   ffi:
     dependency: transitive
     description:
@@ -653,20 +653,20 @@ packages:
     dependency: transitive
     description:
       path: "packages/warframe_drop_data"
-      ref: "warframe_drop_data-v0.1.3+1"
-      resolved-ref: "9de8e75e0477c046d3825934e20b8723f15166a6"
+      ref: "warframe_drop_data-v0.1.5"
+      resolved-ref: "0365f32cc31e718c6b164aaf71453c2a32dc1759"
       url: "https://github.com/SlayerOrnstein/wfcd_dart.git"
     source: git
-    version: "0.1.3+1"
+    version: "0.1.5"
   warframe_worldstate_data:
     dependency: transitive
     description:
       path: "packages/warframe_worldstate_data"
-      ref: "warframe_worldstate_data-v0.1.0+3"
-      resolved-ref: "13b1f5c61af34e339e039e151f88b03bb4aefa5f"
+      ref: "warframe_worldstate_data-v0.1.3+1"
+      resolved-ref: "6ea2e5f7dceb3d05f87ac4e00944b3682b3c6fa1"
       url: "https://github.com/SlayerOrnstein/wfcd_dart.git"
     source: git
-    version: "0.1.0+3"
+    version: "0.1.3+1"
   watcher:
     dependency: transitive
     description:
@@ -711,11 +711,11 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/worldstate_models"
-      ref: "worldstate_models-v0.1.1+7"
-      resolved-ref: "518d774df9398afc756933c3372d8120760a389e"
+      ref: "worldstate_models-v0.1.5+3"
+      resolved-ref: "6ea2e5f7dceb3d05f87ac4e00944b3682b3c6fa1"
       url: "https://github.com/SlayerOrnstein/wfcd_dart.git"
     source: git
-    version: "0.1.1+7"
+    version: "0.1.5+3"
   x509:
     dependency: transitive
     description:
@@ -733,4 +733,4 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: ">=3.9.0 <4.0.0"
+  dart: ">=3.10.0 <4.0.0"
