@@ -17,7 +17,7 @@ dependencies:
   intl: ^0.20.2
   logger: ^2.6.2
   shorebird_redis_client: ^0.0.12
-  time: ^2.1.4
+  time: ^2.1.6
   worldstate_models:
     git:
       url: https://github.com/SlayerOrnstein/wfcd_dart.git
