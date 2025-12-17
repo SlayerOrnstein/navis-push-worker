@@ -11,24 +11,15 @@ class AlertHandler extends MessageHandler {
   final List<WorldEvent> events;
   final List<Alert> alerts;
 
-  // Tags are found in alert[index].tag.
-  static const operationTags = ['JadeShadows'];
-
-  WorldEvent? operation(String tag) {
-    return events.firstWhereOrNull(
-      (i) => i.tag.toLowerCase().contains(tag.toLowerCase()),
-    );
-  }
-
   @override
   Future<void> notify(Send send, IdCache cache) async {
     for (final alert in alerts.where((i) => i.isActive)) {
       final activation = await cache.get(alert.id);
       if (activation != null) continue;
 
-      final operation = this.operation(alert.tag);
+      final operation = events.firstWhereOrNull((e) => e.tag == alert.tag);
       MessageBase message = AlertMessage(alert);
-      if (operationTags.contains(alert.tag) && operation != null) {
+      if (operation != null) {
         message = OperationAlertMessage(operation, alert);
       }
 

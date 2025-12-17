@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:dart_firebase_admin/messaging.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:navis_push_worker/navis_push_worker.dart';
@@ -38,14 +39,14 @@ Future<void> main() async {
   test(
     'Test AlertHandler()',
     () async {
-      final handler = AlertHandler(worldstate.events, worldstate.alerts);
-
       final dups = <Alert>[];
       for (final alert in worldstate.alerts) {
-        final operation = handler.operation(alert.tag);
+        final operation = worldstate.events.firstWhereOrNull(
+          (e) => e.tag == alert.tag,
+        );
+
         MessageBase message = AlertMessage(alert);
-        if (AlertHandler.operationTags.contains(alert.tag) &&
-            operation != null) {
+        if (operation != null) {
           message = OperationAlertMessage(operation, alert);
         }
 
