@@ -119,7 +119,7 @@ class NotificationKeys {
     NotificationKeys.karakWraithStock: 'Karak Wraith Stock',
     NotificationKeys.strunBP: 'Strun Wraith Blueprint',
     NotificationKeys.strunBarrel: 'Strun Wraith Barrel',
-    NotificationKeys.strunReciever: 'Strun Wraith Reciever',
+    NotificationKeys.strunReciever: 'Strun Wraith Receiver"',
     NotificationKeys.strunStock: 'Strun Wraith Stock',
   };
 }
