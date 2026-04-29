@@ -7,8 +7,6 @@ import 'package:logger/logger.dart';
 import 'package:navis_push_worker/src/constants/topic_keys.dart';
 import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 
-final logger = Logger(filter: ProductionFilter());
-
 String? getResourceKey(String? value) {
   if (value == null) return null;
 
