@@ -79,7 +79,7 @@ class NotificationKeys {
 
   static const String strunBP = 'strun_bp';
   static const String strunBarrel = 'strun_barrel';
-  static const String strunReciever = 'strun_reciever';
+  static const String strunReceiver = 'strun_receiver"';
   static const String strunStock = 'strun_stock';
 
   static const String sentientOutpost = 'sentient_outpost';
@@ -119,7 +119,7 @@ class NotificationKeys {
     NotificationKeys.karakWraithStock: 'Karak Wraith Stock',
     NotificationKeys.strunBP: 'Strun Wraith Blueprint',
     NotificationKeys.strunBarrel: 'Strun Wraith Barrel',
-    NotificationKeys.strunReciever: 'Strun Wraith Receiver"',
+    NotificationKeys.strunReceiver: 'Strun Wraith Receiver"',
     NotificationKeys.strunStock: 'Strun Wraith Stock',
   };
 }
