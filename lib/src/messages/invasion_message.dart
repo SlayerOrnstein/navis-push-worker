@@ -13,7 +13,8 @@ class InvasionMessage extends MessageBase {
 
   @override
   String get topic {
-    return getResourceKey(_invasionFaction.reward!.countedItems?.first.key)!;
+    final item = _invasionFaction.reward!.countedItems?.first.key;
+    return getResourceKey(item) ?? item!;
   }
 
   @override

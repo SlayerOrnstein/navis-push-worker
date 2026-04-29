@@ -2,13 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dart_firebase_admin/dart_firebase_admin.dart';
-import 'package:logger/logger.dart';
 import 'package:navis_push_worker/navis_push_worker.dart';
 import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 
 Future<void> main() async {
-  final logger = Logger(filter: ProductionFilter());
-
   final projectId = Platform.environment['FIREBASE_PROJECT'];
   if (projectId == null) throw Exception('FIREBASE_PROJECT not provided');
 
