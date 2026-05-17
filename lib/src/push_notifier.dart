@@ -54,7 +54,7 @@ class PushNotifier {
     );
 
     // Drop data isn't needed for now so it's alright to just leave it empty
-    final deps = Dependency([]);
+    final deps = Dependency();
 
     return RawWorldstate.fromMap(
       jsonDecode(response.body) as Map<String, dynamic>,

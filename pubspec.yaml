@@ -4,7 +4,7 @@ version: 2.2.29
 publish_to: none
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.11.0
 
 dependencies:
   collection: ^1.18.0
@@ -22,10 +22,10 @@ dependencies:
     git:
       url: https://github.com/SlayerOrnstein/wfcd_dart.git
       path: packages/worldstate_models
-      ref: worldstate_models-v0.1.5+11
+      ref: worldstate_models-v0.1.7+7
 
 dev_dependencies:
   husky: ^0.1.7
   mocktail: ^1.0.0
   test: ^1.31.0
-  very_good_analysis: ^10.0.0
+  very_good_analysis: ^10.2.0
