@@ -11,8 +11,7 @@ class CetusMessage extends MessageBase {
   String get body => 'It is now ${cetus.state.name} on Cetus';
 
   @override
-  String get topic =>
-      cetus.isDay ? NotificationKeys.dayKey : NotificationKeys.nightKey;
+  String get topic => cetus.isDay ? NotificationKeys.dayKey : NotificationKeys.nightKey;
 
   @override
   String get title => 'Cetus Cycle';

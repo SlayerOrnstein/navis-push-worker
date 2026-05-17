@@ -11,9 +11,7 @@ class EarthMessage extends MessageBase {
   String get body => 'It is now ${earth.state.name} on earth';
 
   @override
-  String get topic => earth.isDay
-      ? NotificationKeys.earthDayKey
-      : NotificationKeys.earthNightKey;
+  String get topic => earth.isDay ? NotificationKeys.earthDayKey : NotificationKeys.earthNightKey;
 
   @override
   String get title => 'Earth Cycle';

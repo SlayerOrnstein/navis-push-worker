@@ -25,9 +25,7 @@ Credential getServiceAccount() {
     throw Exception('SERVICE_ACCOUNT not provided');
   }
 
-  final serviceAccount =
-      json.decode(utf8.decode(base64.decode(serviceAccountEnv)))
-          as Map<String, dynamic>;
+  final serviceAccount = json.decode(utf8.decode(base64.decode(serviceAccountEnv))) as Map<String, dynamic>;
 
   return Credential.fromServiceAccountParams(
     clientId: serviceAccount['client_id'] as String,

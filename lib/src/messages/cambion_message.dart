@@ -16,9 +16,7 @@ class CambionMessage extends MessageBase {
   }
 
   @override
-  String get topic => cambion.state == CambionState.fass
-      ? NotificationKeys.fassKey
-      : NotificationKeys.vomeKey;
+  String get topic => cambion.state == CambionState.fass ? NotificationKeys.fassKey : NotificationKeys.vomeKey;
 
   @override
   String get title => 'Cambion Cycle';

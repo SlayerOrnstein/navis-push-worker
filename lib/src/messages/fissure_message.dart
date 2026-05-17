@@ -7,8 +7,7 @@ class FissureMessage extends MessageBase {
   final VoidFissure fissure;
 
   @override
-  String get body =>
-      '${fissure.node} - ${fissure.missionType} - ${fissure.faction}';
+  String get body => '${fissure.node} - ${fissure.missionType} - ${fissure.faction}';
 
   @override
   String get topic {

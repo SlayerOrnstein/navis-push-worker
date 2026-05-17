@@ -14,6 +14,5 @@ class VallisMessage extends MessageBase {
   String get title => 'Orb Vallis Cycle';
 
   @override
-  String get topic =>
-      vallis.isWarm ? NotificationKeys.warmKey : NotificationKeys.coldKey;
+  String get topic => vallis.isWarm ? NotificationKeys.warmKey : NotificationKeys.coldKey;
 }

@@ -49,8 +49,7 @@ class NotificationKeys {
 
   static const String wraithTwinVipersBP = 'wraith_twin_vipers_bp';
   static const String wraithTwinVipersBarrels = 'wraith_twin_vipers_barrels';
-  static const String wraithTwinVipersReceivers =
-      'wraith_twin_vipers_receivers';
+  static const String wraithTwinVipersReceivers = 'wraith_twin_vipers_receivers';
   static const String wraithTwinVipersLink = 'wraith_twin_vipers_link';
 
   static const String latronWraithReceiver = 'latron_wraith_receiver';
