@@ -17,7 +17,7 @@ class AlertHandler extends MessageHandler {
       final activation = await cache.get(alert.id);
       if (activation != null) continue;
 
-      final operation = events.firstWhereOrNull((e) => e.tag == alert.tag);
+      final operation = events.firstWhereOrNull((e) => e.tag.contains(alert.tag));
       MessageBase message = AlertMessage(alert);
       if (operation != null) {
         message = OperationAlertMessage(operation, alert);
