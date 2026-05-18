@@ -11,8 +11,11 @@ class FissureMessage extends MessageBase {
 
   @override
   String get topic {
-    return '${fissure.tier}.'
-        '${fissure.missionType.replaceAll(' ', '_').toLowerCase()}';
+    final name = fissure.tier.name;
+    final tier = name.substring(0, 1).toUpperCase() + name.substring(1);
+    final mission = fissure.missionType.replaceAll(' ', '_').toLowerCase();
+
+    return '$tier.$mission';
   }
 
   @override
