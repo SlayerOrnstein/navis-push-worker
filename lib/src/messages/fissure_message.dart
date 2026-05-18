@@ -20,8 +20,11 @@ class FissureMessage extends MessageBase {
 
   @override
   String get title {
-    if (fissure.isSteelpath) return '${fissure.tier} - Steel Path';
-    if (fissure.isStorm) return '${fissure.tier} - Void Storm';
+    final name = fissure.tier.name;
+    final tier = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+    if (fissure.isSteelpath) return '$tier - Steel Path';
+    if (fissure.isStorm) return '$tier - Void Storm';
 
     return '${fissure.tier} Fissure';
   }
