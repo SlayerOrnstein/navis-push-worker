@@ -26,6 +26,6 @@ class FissureMessage extends MessageBase {
     if (fissure.isSteelpath) return '$tier - Steel Path';
     if (fissure.isStorm) return '$tier - Void Storm';
 
-    return '${fissure.tier} Fissure';
+    return '$tier Fissure';
   }
 }
