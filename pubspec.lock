@@ -349,10 +349,10 @@ packages:
     dependency: "direct main"
     description:
       name: logger
-      sha256: "25aee487596a6257655a1e091ec2ae66bc30e7af663592cc3a27e6591e05035c"
+      sha256: "2a0dc097e7b01d942475bdd552356db2d0f768b05540bd4b2b53f1840f2239a7"
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.0"
+    version: "2.8.0"
   logging:
     dependency: transitive
     description:
@@ -703,11 +703,11 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/worldstate_models"
-      ref: "worldstate_models-v0.1.8"
-      resolved-ref: e555e67e8c668100f1c6ea20d4df304a2545567c
+      ref: "worldstate_models-v0.1.8+2"
+      resolved-ref: "539edb5148e8352ada7af7a58482e4017e7f75e6"
       url: "https://github.com/SlayerOrnstein/wfcd_dart.git"
     source: git
-    version: "0.1.8"
+    version: "0.1.8+2"
   x509:
     dependency: transitive
     description:
