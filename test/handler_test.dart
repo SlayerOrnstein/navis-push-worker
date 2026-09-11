@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:collection/collection.dart';
-import 'package:dart_firebase_admin/messaging.dart';
+import 'package:firebase_admin_sdk/messaging.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:navis_push_worker/navis_push_worker.dart';
 import 'package:test/test.dart';

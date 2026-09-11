@@ -1,4 +1,4 @@
-import 'package:dart_firebase_admin/messaging.dart';
+import 'package:firebase_admin_sdk/messaging.dart';
 
 abstract class MessageBase {
   String get title;

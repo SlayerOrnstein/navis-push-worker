@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dart_firebase_admin/dart_firebase_admin.dart';
+import 'package:firebase_admin_sdk/firebase_admin_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:navis_push_worker/navis_push_worker.dart';
 import 'package:shorebird_redis_client/shorebird_redis_client.dart';
@@ -25,12 +25,10 @@ Future<void> main() async {
     await redis.connect();
     await redis.auth(password: uri.userInfo.replaceAll(':', ''));
 
-    final adminApp = FirebaseAdminApp.initializeApp(
-      projectId,
-      getServiceAccount(),
-    );
+    final options = AppOptions(credential: getServiceAccount(), projectId: projectId);
+    final app = FirebaseApp.initializeApp(options: options);
 
-    final messenger = FirebaseMessenger(admin: adminApp, logger: logger);
+    final messenger = FirebaseMessenger(app: app, logger: logger);
     final cache = RedisIdCache(redis);
 
     logger.i('starting push notification worker');

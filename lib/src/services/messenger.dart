@@ -1,11 +1,9 @@
-import 'package:dart_firebase_admin/dart_firebase_admin.dart';
-import 'package:dart_firebase_admin/messaging.dart';
+import 'package:firebase_admin_sdk/firebase_admin_sdk.dart';
+import 'package:firebase_admin_sdk/messaging.dart';
 import 'package:logger/logger.dart';
 
 class FirebaseMessenger {
-  FirebaseMessenger({required FirebaseAdminApp admin, required Logger logger})
-    : _messaging = Messaging(admin),
-      _logger = logger;
+  new({required FirebaseApp app, required this._logger}) : _messaging = app.messaging();
 
   final Messaging _messaging;
   final Logger _logger;
@@ -24,9 +22,7 @@ class FirebaseMessenger {
       topic: topic,
       notification: notification,
       android: androidConfig,
-      data: <String, String>{
-        'click_action': 'FLUTTER_NOTIFICATION_CLICK',
-      },
+      data: <String, String>{'click_action': 'FLUTTER_NOTIFICATION_CLICK'},
     );
 
     try {

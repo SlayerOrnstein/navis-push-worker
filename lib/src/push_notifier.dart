@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:dart_firebase_admin/messaging.dart';
+import 'package:firebase_admin_sdk/messaging.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:navis_push_worker/src/handlers/handlers.dart';
@@ -15,19 +15,13 @@ typedef Notifier = Future<void> Function(Send send, RedisIdCache cache);
 typedef BuildHandler = MessageHandler Function(Worldstate state);
 
 class PushNotifier {
-  PushNotifier({
-    required FirebaseMessenger auth,
-    required IdCache cache,
-    required Logger logger,
-  }) : _auth = auth,
-       _cache = cache,
-       _log = logger {
+  new({required this._auth, required this._cache, required Logger logger}) : _log = logger {
     const delay = Duration(seconds: 60);
 
     Stream<Future<Worldstate>>.periodic(
       delay,
       (_) => _fetchWorldstate(),
-    ).asyncMap((fw) async => fw).listen(_startDispatch);
+    ).asyncMap((fw) => fw).listen(_startDispatch);
   }
 
   final FirebaseMessenger _auth;
@@ -49,15 +43,11 @@ class PushNotifier {
   }
 
   Future<Worldstate> _fetchWorldstate() async {
-    final response = await http.get(
-      Uri.parse('https://api.warframe.com/cdn/worldState.php'),
-    );
+    final response = await http.get(Uri.parse('https://api.warframe.com/cdn/worldState.php'));
 
     // Drop data isn't needed for now so it's alright to just leave it empty
     final deps = Dependency();
 
-    return RawWorldstate.fromMap(
-      jsonDecode(response.body) as Map<String, dynamic>,
-    ).toWorldstate(deps);
+    return RawWorldstate.fromMap(jsonDecode(response.body) as Map<String, dynamic>).toWorldstate(deps);
   }
 }
