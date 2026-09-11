@@ -5,11 +5,7 @@ import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 abstract class IdCache {
   FutureOr<String?> get(String key);
 
-  FutureOr<void> set({
-    required String key,
-    required DateTime value,
-    Duration? ttl,
-  });
+  FutureOr<void> set({required String key, required DateTime value, Duration? ttl});
 }
 
 class RedisIdCache implements IdCache {
@@ -21,11 +17,7 @@ class RedisIdCache implements IdCache {
   Future<String?> get(String key) => _client.get(key: key);
 
   @override
-  Future<void> set({
-    required String key,
-    required DateTime value,
-    Duration? ttl,
-  }) async {
+  Future<void> set({required String key, required DateTime value, Duration? ttl}) async {
     final now = DateTime.timestamp();
 
     await _client.set(

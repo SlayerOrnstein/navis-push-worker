@@ -18,10 +18,7 @@ class PushNotifier {
   new({required this._auth, required this._cache, required Logger logger}) : _log = logger {
     const delay = Duration(seconds: 60);
 
-    Stream<Future<Worldstate>>.periodic(
-      delay,
-      (_) => _fetchWorldstate(),
-    ).asyncMap((fw) => fw).listen(_startDispatch);
+    Stream<Future<Worldstate>>.periodic(delay, (_) => _fetchWorldstate()).asyncMap((fw) => fw).listen(_startDispatch);
   }
 
   final FirebaseMessenger _auth;

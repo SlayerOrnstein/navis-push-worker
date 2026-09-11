@@ -36,36 +36,27 @@ Future<void> main() async {
 
   tearDown(messages.clear);
 
-  test(
-    'Test AlertHandler()',
-    () async {
-      final dups = <Alert>[];
-      for (final alert in worldstate.alerts) {
-        final operation = worldstate.events.firstWhereOrNull(
-          (e) => e.tag == alert.tag,
-        );
+  test('Test AlertHandler()', () async {
+    final dups = <Alert>[];
+    for (final alert in worldstate.alerts) {
+      final operation = worldstate.events.firstWhereOrNull((e) => e.tag == alert.tag);
 
-        MessageBase message = AlertMessage(alert);
-        if (operation != null) {
-          message = OperationAlertMessage(operation, alert);
-        }
-
-        if (messages.containsKey(message.title)) {
-          dups.add(alert);
-          continue;
-        }
-
-        messages[message.title] = message.body;
+      MessageBase message = AlertMessage(alert);
+      if (operation != null) {
+        message = OperationAlertMessage(operation, alert);
       }
 
-      worldstate.alerts.removeWhere(dups.contains);
-      await AlertHandler(
-        worldstate.events,
-        worldstate.alerts,
-      ).notify(send, cache);
-    },
-    skip: worldstate.alerts.isEmpty,
-  );
+      if (messages.containsKey(message.title)) {
+        dups.add(alert);
+        continue;
+      }
+
+      messages[message.title] = message.body;
+    }
+
+    worldstate.alerts.removeWhere(dups.contains);
+    await AlertHandler(worldstate.events, worldstate.alerts).notify(send, cache);
+  }, skip: worldstate.alerts.isEmpty);
 
   test('Test ArchonHandler()', () async {
     final message = ArchonMessage(worldstate.archonHunt);
@@ -74,18 +65,14 @@ Future<void> main() async {
     await ArchonHandler(worldstate.archonHunt).notify(send, cache);
   });
 
-  test(
-    'Test BaroHandler()',
-    () async {
-      for (final trader in worldstate.voidTraders) {
-        final message = BaroMessage(trader);
-        messages[message.title] = message.body;
-      }
+  test('Test BaroHandler()', () async {
+    for (final trader in worldstate.voidTraders) {
+      final message = BaroMessage(trader);
+      messages[message.title] = message.body;
+    }
 
-      await BaroHandler(worldstate.voidTraders).notify(send, cache);
-    },
-    skip: worldstate.voidTraders.isEmpty,
-  );
+    await BaroHandler(worldstate.voidTraders).notify(send, cache);
+  }, skip: worldstate.voidTraders.isEmpty);
 
   test('Test CambionHandler()', () async {
     final message = CambionMessage(worldstate.cambionCycle);
@@ -101,18 +88,14 @@ Future<void> main() async {
     await ArchonHandler(worldstate.archonHunt).notify(send, cache);
   });
 
-  test(
-    'Test DarvoHandler()',
-    () async {
-      for (final deal in worldstate.dailyDeals) {
-        final message = DarvoMessage(deal);
-        messages[message.title] = message.body;
-      }
+  test('Test DarvoHandler()', () async {
+    for (final deal in worldstate.dailyDeals) {
+      final message = DarvoMessage(deal);
+      messages[message.title] = message.body;
+    }
 
-      await BaroHandler(worldstate.voidTraders).notify(send, cache);
-    },
-    skip: worldstate.dailyDeals.isEmpty,
-  );
+    await BaroHandler(worldstate.voidTraders).notify(send, cache);
+  }, skip: worldstate.dailyDeals.isEmpty);
 
   test('Test DuviriHandler()', () async {
     final message = DuviriMessage(worldstate.duviriCycle);
@@ -121,72 +104,56 @@ Future<void> main() async {
     await DuviriHandler(worldstate.duviriCycle).notify(send, cache);
   });
 
-  test(
-    'Test FissureHandler()',
-    () async {
-      final dups = <VoidFissure>[];
-      for (final fissure in worldstate.fissures) {
-        final message = FissureMessage(fissure);
-        // Fissures can have the same title so use remove the instances
-        if (messages.containsKey(message.title)) {
-          dups.add(fissure);
-          continue;
-        }
-
-        messages[message.title] = message.body;
+  test('Test FissureHandler()', () async {
+    final dups = <VoidFissure>[];
+    for (final fissure in worldstate.fissures) {
+      final message = FissureMessage(fissure);
+      // Fissures can have the same title so use remove the instances
+      if (messages.containsKey(message.title)) {
+        dups.add(fissure);
+        continue;
       }
 
-      void send(String topic, Notification notification) {
-        final message = messages[notification.title];
-        expect(message, notification.body);
-      }
+      messages[message.title] = message.body;
+    }
 
-      await FissuresHandler(
-        worldstate.fissures..removeWhere(dups.contains),
-      ).notify(send, cache);
-    },
-    skip: worldstate.fissures.isEmpty,
-  );
+    void send(String topic, Notification notification) {
+      final message = messages[notification.title];
+      expect(message, notification.body);
+    }
 
-  test(
-    'Test InvasionHandler()',
-    () async {
-      for (final invasion in worldstate.invasions) {
-        final message = InvasionMessage(invasion);
-        messages[message.body] = message.title;
-      }
+    await FissuresHandler(worldstate.fissures..removeWhere(dups.contains)).notify(send, cache);
+  }, skip: worldstate.fissures.isEmpty);
 
-      await Invasionhandler(worldstate.invasions).notify(send, cache);
-    },
-    skip: true,
-  );
+  test('Test InvasionHandler()', () async {
+    for (final invasion in worldstate.invasions) {
+      final message = InvasionMessage(invasion);
+      messages[message.body] = message.title;
+    }
 
-  test(
-    'Test OrbiterNewsHandler()',
-    () async {
-      for (final news in worldstate.news) {
-        final message = OrbiterNewsMessage(news);
-        messages[message.body] = message.title;
-      }
+    await Invasionhandler(worldstate.invasions).notify(send, cache);
+  }, skip: true);
 
-      // News can have the same title so use the body as the key instead
-      void send(String topic, Notification notification) {
-        final message = messages[notification.body];
-        expect(message, notification.title);
-      }
+  test('Test OrbiterNewsHandler()', () async {
+    for (final news in worldstate.news) {
+      final message = OrbiterNewsMessage(news);
+      messages[message.body] = message.title;
+    }
 
-      await OrbiterNewsHandler(worldstate.news).notify(send, cache);
-    },
-    skip: worldstate.news.isEmpty,
-  );
+    // News can have the same title so use the body as the key instead
+    void send(String topic, Notification notification) {
+      final message = messages[notification.body];
+      expect(message, notification.title);
+    }
+
+    await OrbiterNewsHandler(worldstate.news).notify(send, cache);
+  }, skip: worldstate.news.isEmpty);
 
   test('Test SentientOutpostHandler()', () async {
     final message = SentientMessage(worldstate.sentientOutpost);
     messages[message.title] = message.body;
 
-    await SentientOutpostHandler(
-      worldstate.sentientOutpost,
-    ).notify(send, cache);
+    await SentientOutpostHandler(worldstate.sentientOutpost).notify(send, cache);
   });
 
   test('Test SortieHandler()', () async {
