@@ -9,7 +9,7 @@ environment:
 dependencies:
   collection: ^1.18.0
   crypto: ^3.0.7
-  firebase_admin_sdk: ^0.5.4
+  firebase_admin_sdk: ^0.5.5
   googleapis: ^16.0.0
   googleapis_auth: ^2.3.3
   hive: ^2.2.3
