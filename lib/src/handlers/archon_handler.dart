@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/services/services.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class ArchonHandler extends MessageHandler {
-  ArchonHandler(this.archon);
+  new(this.archon);
 
   final Sortie archon;
 

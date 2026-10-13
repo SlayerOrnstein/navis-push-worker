@@ -3,7 +3,7 @@ import 'package:navis_push_worker/src/messages/message_base.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class SentientMessage extends MessageBase {
-  SentientMessage(this.outpost);
+  new(this.outpost);
 
   final SentientOutpost outpost;
 

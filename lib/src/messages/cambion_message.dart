@@ -4,7 +4,7 @@ import 'package:navis_push_worker/src/messages/message_base.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class CambionMessage extends MessageBase {
-  CambionMessage(this.cambion);
+  new(this.cambion);
 
   final CambionCycle cambion;
 

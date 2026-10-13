@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/services/services.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class VallisHandler extends MessageHandler {
-  VallisHandler(this.vallis);
+  new(this.vallis);
 
   final VallisCycle vallis;
 

@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/services/services.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class DuviriHandler extends MessageHandler {
-  DuviriHandler(this.duviriCycle);
+  new(this.duviriCycle);
 
   final DuviriCycle duviriCycle;
 

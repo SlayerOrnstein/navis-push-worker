@@ -6,7 +6,7 @@ import 'package:navis_push_worker/src/services/services.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class AlertHandler extends MessageHandler {
-  AlertHandler(this.events, this.alerts);
+  new(this.events, this.alerts);
 
   final List<WorldEvent> events;
   final List<Alert> alerts;

@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/services/services.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class CetusHandler extends MessageHandler {
-  CetusHandler(this.cetus);
+  new(this.cetus);
 
   final CetusCycle cetus;
 

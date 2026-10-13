@@ -3,7 +3,7 @@ import 'package:navis_push_worker/src/messages/message_base.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class BaroMessage extends MessageBase {
-  BaroMessage(this.trader);
+  new(this.trader);
 
   final Trader trader;
 

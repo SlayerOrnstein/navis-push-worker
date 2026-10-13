@@ -2,7 +2,7 @@ import 'package:navis_push_worker/navis_push_worker.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class OperationAlertMessage extends MessageBase {
-  OperationAlertMessage(this.event, this.alert);
+  new(this.event, this.alert);
 
   final Alert alert;
   final WorldEvent event;

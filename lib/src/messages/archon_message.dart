@@ -3,7 +3,7 @@ import 'package:navis_push_worker/src/messages/message_base.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class ArchonMessage extends MessageBase {
-  ArchonMessage(this.archon);
+  new(this.archon);
 
   final Sortie archon;
 

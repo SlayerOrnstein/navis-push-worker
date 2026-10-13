@@ -8,7 +8,7 @@ import 'package:navis_push_worker/src/services/services.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class BaroHandler extends MessageHandler {
-  BaroHandler(this.traders);
+  new(this.traders);
 
   final List<Trader> traders;
 

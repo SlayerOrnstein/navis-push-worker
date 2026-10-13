@@ -9,7 +9,7 @@ abstract class IdCache {
 }
 
 class RedisIdCache implements IdCache {
-  RedisIdCache(RedisClient client) : _client = client;
+  new(RedisClient client) : _client = client;
 
   final RedisClient _client;
 

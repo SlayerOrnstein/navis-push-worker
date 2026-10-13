@@ -6,7 +6,7 @@ import 'package:navis_push_worker/src/utils.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class Invasionhandler extends MessageHandler {
-  Invasionhandler(this.invasions);
+  new(this.invasions);
 
   final List<Invasion> invasions;
 

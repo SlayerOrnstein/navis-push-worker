@@ -5,7 +5,7 @@ import 'package:navis_push_worker/src/services/services.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
 class DarvoDealHandler extends MessageHandler {
-  DarvoDealHandler(this.darvoDeals);
+  new(this.darvoDeals);
 
   final List<DailyDeal> darvoDeals;
 
