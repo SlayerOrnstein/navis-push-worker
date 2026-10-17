@@ -16,7 +16,7 @@ dependencies:
   http: ^1.6.0
   intl: ^0.20.3
   logger: ^2.8.0
-  shorebird_redis_client: ^0.0.13
+  shorebird_redis_client: ^0.0.14
   time: ^2.1.6
   worldstate_models:
     git:
