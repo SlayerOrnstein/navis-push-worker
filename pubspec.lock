@@ -157,10 +157,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_admin_sdk
-      sha256: "3f81c5e2d2a93065c4c85917f2b291d69d5597e33ae0ba85777867bced19a58d"
+      sha256: b1ef0c20eda905c89a1634ccc19d9dbd7895f42ac60c0cf1de49b20003f168b8
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.4"
+    version: "0.5.6"
   frontend_server_client:
     dependency: transitive
     description:
@@ -189,10 +189,10 @@ packages:
     dependency: transitive
     description:
       name: google_cloud_firestore
-      sha256: "406962696ddb8239524d648d6e13fe22382f517a90e1c3299b8c5a621b77bfc6"
+      sha256: cabb0372a109933bbe4844ef42a82e9908952c50372c2b6ab74ca01f96b89304
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.3"
+    version: "0.5.5"
   google_cloud_firestore_v1:
     dependency: transitive
     description:
@@ -289,6 +289,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.6.0"
+  http2:
+    dependency: transitive
+    description:
+      name: http2
+      sha256: "480bf904908b4e4ec4fac8117f69f5ff54cf48c12b1761f0a192e1e10196ee7b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   http_multi_server:
     dependency: transitive
     description:
