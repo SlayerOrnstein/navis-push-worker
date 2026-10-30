@@ -11,17 +11,17 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           token: ${{ secrets.CI_GITHUB_TOKEN }}
 
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@v1.8.1  
+        uses: dart-lang/setup-dart@v1.8.1
 
       - name: Semantic Release
         id: semantic
-        uses: cycjimmy/semantic-release-action@v6
+        uses: cycjimmy/semantic-release-action@v8.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
         with:
@@ -32,12 +32,12 @@ jobs:
 
       - name: Setup Tailscale
         if: steps.semantic.outputs.new_release_published == 'true'
-        uses: tailscale/github-action@v4
+        uses: tailscale/github-action@v4.4.0
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
-      
+
       - name: Push to dokku
         if: steps.semantic.outputs.new_release_published == 'true'
         run: tailscale ssh orn@asgard dokku git:sync --build navis-push-worker https://github.com/SlayerOrnstein/navis-push-worker.git
