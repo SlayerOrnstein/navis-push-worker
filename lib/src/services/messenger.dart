@@ -15,7 +15,7 @@ class FirebaseMessenger {
 
     final androidConfig = AndroidConfig(
       priority: AndroidConfigPriority.high,
-      notification: AndroidNotification(icon: icon ?? 'ic_general_notification'),
+      notification: AndroidNotification(icon: icon ?? 'ic_notification'),
     );
 
     final topicMessage = TopicMessage(
