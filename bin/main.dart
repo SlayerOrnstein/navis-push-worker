@@ -19,7 +19,7 @@ Future<void> main() async {
   try {
     final uri = Uri.parse(redisUrl);
     final redis = RedisClient(
-      logger: RedisCustomLogger(logger),
+      // logger: RedisCustomLogger(logger),
       socket: RedisSocketOptions(host: uri.host, port: uri.port),
     );
 
