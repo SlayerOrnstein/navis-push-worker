@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:firebase_admin_sdk/firebase_admin_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:navis_push_worker/navis_push_worker.dart';
+import 'package:navis_push_worker/src/services/arbitration.dart';
 import 'package:shorebird_redis_client/shorebird_redis_client.dart';
 
 Future<void> main() async {
@@ -31,7 +32,10 @@ Future<void> main() async {
     final messenger = FirebaseMessenger(app: app, logger: logger);
     final cache = RedisIdCache(redis);
 
-    logger.i('starting push notification worker');
+    logger.i('Creating Arbitration timers');
+    await setupArbitrationTimers(messenger, cache);
+
+    logger.i('Starting push notification worker');
     PushNotifier(auth: messenger, cache: cache, logger: logger)
       ..addHandler((state) => AlertHandler(state.events, state.alerts))
       ..addHandler((state) => BaroHandler(state.voidTraders))

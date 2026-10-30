@@ -26,4 +26,8 @@ class RedisIdCache implements IdCache {
       ttl: ttl ?? now.add(const Duration(days: 7)).difference(now),
     );
   }
+
+  Future<void> store(String key, String value) async {
+    await _client.set(key: key, value: value);
+  }
 }
