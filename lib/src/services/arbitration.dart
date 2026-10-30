@@ -26,6 +26,7 @@ Future<void> setupArbitrationTimers(FirebaseMessenger messenger, RedisIdCache ca
       await messenger.send(
         'arbitrations',
         Notification(title: 'Arbitration', body: '${node.name} | ${node.type} | ${node.enemy}'),
+        'ic_arbitration_notifcation',
       );
     });
   }
