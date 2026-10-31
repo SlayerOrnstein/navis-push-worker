@@ -8,14 +8,14 @@ class FirebaseMessenger {
   final Messaging _messaging;
   final Logger _logger;
 
-  Future<void> send(String topic, Notification notification, [String? icon]) async {
+  Future<void> send(String topic, Notification notification) async {
     if (topic.isEmpty) {
       _logger.w('Topic empty not sending message for ${notification.title}');
     }
 
     final androidConfig = AndroidConfig(
       priority: AndroidConfigPriority.high,
-      notification: AndroidNotification(icon: icon ?? 'ic_notification'),
+      notification: AndroidNotification(icon: 'ic_notification'),
     );
 
     final topicMessage = TopicMessage(
