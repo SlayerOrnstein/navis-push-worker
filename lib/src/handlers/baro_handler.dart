@@ -26,7 +26,7 @@ class BaroHandler extends MessageHandler {
 
       final message = BaroMessage(trader);
 
-      await send(message.topic, message.notification);
+      await send(message.topic, message.notification, 'ic_notification_baro');
       await cache.set(key: digest, value: trader.activation);
     }
   }

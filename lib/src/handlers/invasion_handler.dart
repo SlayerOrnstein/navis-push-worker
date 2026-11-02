@@ -5,6 +5,8 @@ import 'package:navis_push_worker/src/services/services.dart';
 import 'package:navis_push_worker/src/utils.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
+const String _invasionIcon = 'ic_notification_invasion';
+
 class Invasionhandler extends MessageHandler {
   new(this.invasions);
 
@@ -19,14 +21,14 @@ class Invasionhandler extends MessageHandler {
       final dTopic = getResourceKey(invasion.defender.reward!.countedItems!.first.key);
       if (dTopic != null) {
         final defender = InvasionMessage(invasion);
-        await send(dTopic, defender.notification);
+        await send(dTopic, defender.notification, _invasionIcon);
       }
 
       if (!invasion.vsInfestation) {
         final aTopic = getResourceKey(invasion.attacker.reward!.countedItems!.first.key);
         if (aTopic != null) {
           final attacker = InvasionMessage(invasion, isDefending: false);
-          await send(aTopic, attacker.notification);
+          await send(aTopic, attacker.notification, _invasionIcon);
         }
       }
 

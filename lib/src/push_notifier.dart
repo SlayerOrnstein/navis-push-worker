@@ -8,7 +8,7 @@ import 'package:navis_push_worker/src/handlers/handlers.dart';
 import 'package:navis_push_worker/src/services/services.dart';
 import 'package:worldstate_models/worldstate_models.dart';
 
-typedef Send = FutureOr<void> Function(String topic, Notification notification);
+typedef Send = FutureOr<void> Function(String topic, Notification notification, [String? icon]);
 
 typedef Notifier = Future<void> Function(Send send, RedisIdCache cache);
 

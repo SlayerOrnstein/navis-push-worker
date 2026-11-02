@@ -29,7 +29,7 @@ Future<void> main() async {
 
   final messages = <String, String>{};
 
-  void send(String topic, Notification notification) {
+  void send(String topic, Notification notification, [String? icon]) {
     final message = messages[notification.title];
     expect(message, notification.body);
   }
@@ -117,7 +117,7 @@ Future<void> main() async {
       messages[message.title] = message.body;
     }
 
-    void send(String topic, Notification notification) {
+    void send(String topic, Notification notification, [String? icon]) {
       final message = messages[notification.title];
       expect(message, notification.body);
     }
@@ -141,7 +141,7 @@ Future<void> main() async {
     }
 
     // News can have the same title so use the body as the key instead
-    void send(String topic, Notification notification) {
+    void send(String topic, Notification notification, [String? icon]) {
       final message = messages[notification.body];
       expect(message, notification.title);
     }
