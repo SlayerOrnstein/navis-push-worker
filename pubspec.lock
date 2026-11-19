@@ -501,10 +501,10 @@ packages:
     dependency: "direct main"
     description:
       name: shorebird_redis_client
-      sha256: e26b769a95eca53cc2424e6e7203ee809cd29c1d81f13017462e66e710a747b7
+      sha256: "2a5391946037578d517e9a7023327ffd10365204c54a3bb9581c2c436031fda3"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.15"
+    version: "0.0.16"
   source_map_stack_trace:
     dependency: transitive
     description:
